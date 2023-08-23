@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Setting Up</h1>
+<h3>Initializing Project</h3>
+<div>
+    <li>npx create-next-app@latest ./</li>
+    <li>Using typescript</li>
+    <li>Using Tailwindcss</li>
+    <li>Using App Router</li>
+</div>
 
-## Getting Started
+<h3>Clerk</h3>
+<div>
+Clerk is a third party library that we will use to handle authentication for us.
+</div>
+<li>npm install @clerk/nextjs</li>
 
-First, run the development server:
+<h3>Mongoose</h3>
+<div>
+Mongoose will be our database for this project.
+</div>
+<li>npm install mongoose</li>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<h3>Svix (may not be needed)</h3>
+<div>
+Will allow us to create webhooks, will leave this here for future reference.
+</div>
+<li>npm install svix</li>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h3>Uploadthing</h3>
+<div>
+We will use this to upload our profile images.
+</div>
+<li>npm install @uploadthing/react uploadthing</li>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h3>Tailwindcss Animate</h3>
+<div>
+We will use this for CSS animations.
+</div>
+<li>npm install tailwindcss-animate</li>
