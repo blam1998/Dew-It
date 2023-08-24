@@ -1,15 +1,21 @@
 import Image from 'next/image'
-import TopBar from '@/components/shared/TopBar';
-import LeftSideBar from '@/components/shared/LeftSideBar';
+import Intro from '@/components/shared/Intro';
+import { Button } from '@/components/ui/button';
+import {currentUser} from '@clerk/nextjs';
+import { checkNewUser } from '@/lib/actions/user.actions';
 
+export default async function Page() {
+    const user = await currentUser();
+    const userData = {
+        id: user?.id || "",
+        username: user?.username || "",
+        name: user?.firstName? user.firstName : user?.lastName ||  "",
+    }
 
-export default function Home() {
+    const checkUser = await checkNewUser(userData);
   return (
-    <main>
-      <TopBar/>
-      <main className = "flex flex-row gap-4">
-        <LeftSideBar/>
-      </main>
+    <main className = "bg-black h-screen flex flex-col gap-4 items-center">
+        <Intro/>
     </main>
   )
 }

@@ -36,3 +36,21 @@ We will use this to upload our profile images.
 We will use this for CSS animations.
 </div>
 <li>npm install tailwindcss-animate</li>
+
+<h3>Shadcn</h3>
+<div>
+We will use this library for resuable CSS components such as Forms, Buttons, Text Areas, etc....
+</div>
+<li>https://ui.shadcn.com/docs/installation/next</li>
+<br><br>
+
+
+
+
+
+<h1>Code Organization</h1>
+<li>Server side code resides in 'app' directory</li>
+<li>Client side code resides in 'components' directory</li>
+<li>Database schema resides in 'lib/models'</li>
+<li>Database actions resides in 'lib/action'</li>
+<br><br>
