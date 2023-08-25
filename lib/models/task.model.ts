@@ -27,12 +27,11 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     default: "",
   },
-  children: [
+  children:
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Description",
     },
-  ],
 });
 
 const Task = mongoose.models.Task || mongoose.model("Task", taskSchema);

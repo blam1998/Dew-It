@@ -16,7 +16,7 @@ export async function checkNewUser({
     id,
     username,
     name,
-} : Props) : Promise<void>{
+} : Props) : Promise<boolean>{
     try{
         connectToDB();
         console.log("Checking new user");
@@ -24,13 +24,12 @@ export async function checkNewUser({
             id: id,
         })
 
-        if (hasUser) return;
+        return hasUser;
 
-        await addNewUser({id,username,name});
         
     }
     catch(error: any){
-        throw new Error(`Failed to update user: ${error.message}`);
+        throw new Error(`Failed to check user: ${error.message}`);
     }
 }
 
@@ -41,13 +40,13 @@ export async function addNewUser({
 } : Props){
     try{
         connectToDB();
-        
+        const currentDate = new Date();
         const insertUser = await User.findOneAndUpdate(
             {id: id},
             {
             username: username,
             name: name,
-            dateJoined: Date.now,
+            dateJoined: `${currentDate.getMonth()}-${currentDate.getDate()}-${currentDate.getFullYear()}`,
             taskCount: "0",
             task: []},
             {upsert: true}

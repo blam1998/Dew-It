@@ -1,7 +1,10 @@
 import * as z from 'zod';
 
-export const UserValidation = z.object({
+
+
+
+export const TaskValidation = z.object({
     taskName: z.string().min(3).max(100),
-    dueDate: z.string().min(0).max(8),
-    dueTime: z.string().min(0).max(4)
+    dueDate: z.date().min(new Date()),
+    description: z.string().min(0).max(1000),
 })

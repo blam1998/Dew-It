@@ -95,6 +95,7 @@ const config: Config = {
         "primary": "#FFB620",
         "black": "#000000",
         "white": "#FFFFFF",
+        "dark-blue": "#070747",
 
       },
       backgroundImage: {
