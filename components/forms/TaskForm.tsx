@@ -15,30 +15,37 @@ import { Input } from "@/components/ui/input"
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
-import DatePicker from 'react-date-picker';
-import { useState } from 'react';
-
-
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import { addTask } from "@/lib/actions/task.actions";
 
 
 
-export const TaskForm = () => {
-    const [value, onChange] = useState<Value>(new Date());
+function TaskForm( {user} : {user: String}){
+    const date = new Date();
+
+    const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
 
     const form = useForm<z.infer<typeof TaskValidation>>({
         resolver: zodResolver(TaskValidation),
         defaultValues:{
           taskName: '',
-          dueDate: new Date(),
+          dueDate: customDate,
           description: '',
         }
     })
 
-    function onSubmit(values: z.infer<typeof TaskValidation>){
-        //Handle Submission
+    const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
+        if (!user){return}
+
+        const dueDate = form.getValues().dueDate;
+        const description = form.getValues().description;
+        const taskName = form.getValues().taskName;
+
+        await addTask({
+            dueDate : dueDate,
+            description: description,
+            taskName: taskName,
+            userId: user
+        })
     }
 
     return(
@@ -78,21 +85,23 @@ export const TaskForm = () => {
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormItem className = "mt-10 text-white">
-                            <FormLabel>Description</FormLabel>
+                            <FormItem className = "mt-10">
+                            <FormLabel className = "text-white">Description</FormLabel>
                             <FormControl>
                                 <Textarea
                                 rows = {8}
-                                placeholder="Description" {...field} className = "bg-white" />
+                                placeholder="Description" {...field}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                         />
+                        <Button type="submit" className = "mt-8">Submit</Button>
                     </form>
                 </div>
-                <Button type="submit" className = "mt-8">Submit</Button>
             </Form>
         </div>
     )
 }
+
+export default TaskForm;

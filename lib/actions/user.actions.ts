@@ -56,3 +56,15 @@ export async function addNewUser({
         throw new Error(`Failed to add new user: ${error.message}`);
     }
 }
+
+
+
+export async function fetchUser(id: string){
+    try{
+        connectToDB();
+        return await User.findOne({id: id});
+    }
+    catch(error:any){
+        throw new Error(`Failed to fetch user: ${error.message}`)
+    }
+}

@@ -23,14 +23,9 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     default: "",
   },
-  dueTime: {
-    type: Date,
-    default: "",
-  },
-  children:
+  description:
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Description",
+      type: String,
     },
 });
 

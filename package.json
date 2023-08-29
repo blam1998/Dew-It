@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.268.0",
+    "mongodb-client-encryption": "^2.9.0",
     "mongoose": "^7.4.4",
     "next": "13.4.19",
     "postcss": "8.4.28",

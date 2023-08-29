@@ -1,16 +1,23 @@
 import Image from 'next/image'
 import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
-import { TaskForm } from '@/components/forms/task';
+import  TaskForm  from '@/components/forms/TaskForm';
+import {currentUser} from '@clerk/nextjs'
+import { fetchUser } from '@/lib/actions/user.actions';
 
-export default function Page() {
+export default async function Page() {
+  const user = await currentUser();
+
+  if (!user){return null;}
+
+  const userId = await fetchUser(user.id);
 
   return (
     <main>
       <TopBar/>
       <main className = "flex flex-row bg-dark-blue w-full">
         <LeftSideBar/>
-        <TaskForm/>
+        <TaskForm user = {userId._id}/>
       </main>
     </main>
   )
