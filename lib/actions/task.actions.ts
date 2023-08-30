@@ -13,6 +13,7 @@ interface Props{
     description: string
 }
 
+
 export async function addTask({
     userId,
     dueDate,
@@ -39,3 +40,43 @@ export async function addTask({
     }
 }
 
+export async function fetchAllTask(userId : {userId: mongoose.Schema.Types.ObjectId}){
+    try{
+        connectToDB();
+        const currUserTasks = Task.find({author: {$in:[userId]}})
+        .find({isDone: {$in:[false]}})
+        .populate({
+            path: 'author',
+            model: User,
+            select: "_id username",
+            populate:{
+                path: 'tasks',
+                model: Task,
+                select: "_id taskName isDone description dueDate"
+            }
+        }).exec();
+
+        return currUserTasks;
+    }
+    catch(error:any){
+        throw new Error(`Error fetching all tasks: ${error.message}`)
+    }
+
+    return null;
+}
+
+export async function updateTaskStatus(
+    id: any){
+    console.log("Hi from update status");
+    try{
+        connectToDB();
+        const filter = {_id: id}
+        const update = {$set: {isDone: true}}
+
+        const result =  await Task.updateOne(filter,update);
+
+    }
+    catch(error:any){
+        throw new Error(`Failed to update task status: ${error.message}`)
+    }
+}

@@ -16,10 +16,12 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
 import { addTask } from "@/lib/actions/task.actions";
+import { useRouter } from "next/navigation";
 
 
 
 function TaskForm( {user} : {user: String}){
+    const router = useRouter();
     const date = new Date();
 
     const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
@@ -45,7 +47,9 @@ function TaskForm( {user} : {user: String}){
             description: description,
             taskName: taskName,
             userId: user
-        })
+        });
+
+        router.push('/home');
     }
 
     return(
@@ -96,7 +100,7 @@ function TaskForm( {user} : {user: String}){
                             </FormItem>
                         )}
                         />
-                        <Button type="submit" className = "mt-8">Submit</Button>
+                        <Button type="submit" className = "mt-8">Add Task</Button>
                     </form>
                 </div>
             </Form>
