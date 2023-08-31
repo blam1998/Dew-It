@@ -16,10 +16,6 @@ export default async function Page() {
 
   const allTasks = await fetchAllTask(userId._id);
 
-  const test = () => {
-    console.log("hi");
-  }
-
   return (
     <div className = "w-full">
       <TopBar/>
@@ -37,10 +33,11 @@ export default async function Page() {
                   id = {c._id}
                   dueDate = {c.dueDate}
                   isDone = {c.isDone}
+                  clientId = {"task-"+i.toString()}
                 />
               </div>
             )
-          }) : (<div className = "text-black heading1-bold mt-28">No Tasks</div>)
+          }) : (<div className = "text-black heading1-bold mt-28 ml-60">No Tasks</div>)
         }
         </div>
       </div>

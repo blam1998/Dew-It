@@ -88,4 +88,8 @@
   .renderdescription{
     @apply overflow-y-auto justify-between flex flex-row ml-60;
   }
+
+  .inner-container{
+    @apply ml-60 mt-28 h-screen
+  }
 }

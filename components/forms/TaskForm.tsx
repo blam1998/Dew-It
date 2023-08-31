@@ -1,6 +1,6 @@
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { TaskValidation } from '@/lib/validation/task';
+import { TaskValidation, customDateSchema, jsonSchema} from '@/lib/validation/task';
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -42,18 +42,33 @@ function TaskForm( {user} : {user: String}){
         const description = form.getValues().description;
         const taskName = form.getValues().taskName;
 
+        const result = customDateSchema.safeParse(dueDate.toString());
+
+        if (!result.success){
+            console.log("Date validation error:", dueDate);
+            return;
+        }
+
+        const dateArray = dueDate.split('-');
+        
+        const newDate = new Date();
+        newDate.setMonth(dateArray[0] - 1);
+        newDate.setDate(dateArray[1]);
+        newDate.setFullYear(dateArray[2]);
+
+
         await addTask({
-            dueDate : dueDate,
+            dueDate : newDate,
             description: description,
             taskName: taskName,
             userId: user
         });
 
-        router.push('/home');
+        router.push('/all_task');
     }
 
     return(
-        <div className = "w-800 mt-20 flex flex-col items-center ml-auto mr-auto" style={{width: "800px"}}>
+        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen" style={{width: "50%"}}>
             <Form {...form}>
                 <div className = "w-full mt-10">
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -78,7 +93,7 @@ function TaskForm( {user} : {user: String}){
                             <FormItem className = "mt-10 text-black">
                             <FormLabel className = "text-white">Due Date</FormLabel>
                             <FormControl>
-                                <Input placeholder="MM:DD:YYYY" {...field} className = "bg-white" />
+                                <Input placeholder="MM-DD-YYYY" {...field} className = "bg-white" />
                             </FormControl>
                             <FormMessage />
                             </FormItem>

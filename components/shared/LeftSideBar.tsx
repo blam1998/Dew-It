@@ -13,8 +13,8 @@ const LeftSideBar = () => {
                 <Link href = "/all_task" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">All Tasks</Link>
                 <Link href = "/today" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">Today's List</Link>
                 <Link href = "/this_week" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">This Week's List</Link>
-                <Link href = "/add_task" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">Add Task</Link>
                 <Link href = "/completed" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">Completed</Link>
+                <Link href = "/add_task" className = "p-4 pl-8 pr-8 text-white text-heading3-semibold block">Add Task</Link>
             </div>
         </section>
     )

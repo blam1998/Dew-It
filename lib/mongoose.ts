@@ -5,13 +5,12 @@ let isConnected = false;
 export const connectToDB = async () => {
     mongoose.set("strictQuery",true);
 
-    if (!process.env.MONGODB_URL){
-        console.log("No DB URL.");
+    if (isConnected){
         return;
     }
 
-    if (isConnected){
-        console.log("Already Connected.");
+    if (!process.env.MONGODB_URL){
+        console.log("No DB URL.");
         return;
     }
 
