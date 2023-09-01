@@ -40,6 +40,9 @@ export default async function Page() {
           }) : (<div className = "text-black heading1-bold mt-28 ml-60">No Tasks</div>)
         }
         </div>
+        <div className = "w-[33vw]" id = 'rightsidebar'>
+
+        </div>
       </div>
     </div>
   )

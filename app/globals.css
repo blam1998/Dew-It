@@ -78,7 +78,7 @@
 
 @layer components {
   .leftsidebar {
-    @apply fixed left-0 top-0 z-20 flex h-screen bg-black justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-60;
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-black justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-[60];
   }
 
   .topbar {
@@ -90,6 +90,6 @@
   }
 
   .inner-container{
-    @apply ml-60 mt-28 h-screen
+    @apply pl-60 pt-28 h-screen w-full
   }
 }

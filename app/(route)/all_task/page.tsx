@@ -1,3 +1,4 @@
+"use server"
 import Image from 'next/image'
 import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
@@ -5,6 +6,11 @@ import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchAllTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
+
+export async function renderDescription(){
+  "use server";
+  console.log("Hi");
+}
 
 
 export default async function Page() {
@@ -23,7 +29,7 @@ export default async function Page() {
         <div className = "w-40% h-screen">
           <LeftSideBar/>
         </div>
-        <div className = "flex flex-col text-black">
+        <div className = "inner-container">
           {allTasks?.length !== 0? allTasks?.map((c,i) => {
             return(
               <div>
@@ -37,8 +43,11 @@ export default async function Page() {
                 />
               </div>
             )
-          }) : (<div className = "text-black heading1-bold mt-28 ml-60">No Tasks</div>)
+          }) : (<div className = "text-black heading1-bold">No Tasks</div>)
         }
+        </div>
+        <div className = "w-[33vw]" id = 'rightsidebar'>
+
         </div>
       </div>
     </div>

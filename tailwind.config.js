@@ -104,6 +104,7 @@ module.exports = {
         "black": "#000000",
         "white": "#FFFFFF",
         "dark-blue": "#070747",
+        "gray": "#808080",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

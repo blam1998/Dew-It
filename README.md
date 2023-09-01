@@ -44,12 +44,6 @@ We will use this library for resuable CSS components such as Forms, Buttons, Tex
 <li>https://ui.shadcn.com/docs/installation/next</li>
 <li>https://ui.shadcn.com/docs/components/form</li>
 
-<h3>React Date Picker</h3>
-<div>
-Open source library that will help us with picking a date for our forms.
-</div>
-<br><br>
-
 
 
 

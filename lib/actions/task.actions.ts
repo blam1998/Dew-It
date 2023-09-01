@@ -126,12 +126,14 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
         startDate.setHours(0,0,0,0);
         specificDate.setHours(0,0,0,0);
 
+        
+
         connectToDB();
         const currUserTasks = Task.find({author: {$in:[userId]}})
         .find({isDone: {$in:[false]}})
         .find({dueDate: {
             $gte: startDate,
-            $lte: specificDate
+            $lte: specificDate,
         }})
         .populate({
             path: 'author',
@@ -148,5 +150,25 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
     }
     catch(error:any){
         throw new Error(`Error fetching all tasks: ${error.message}`)
+    }
+}
+
+
+export async function updateTask({id, isDone, description, taskName, dueDate} : {id: mongoose.Types.ObjectId, isDone: boolean, description: string, taskName: string, dueDate: Date}){
+    try{
+        connectToDB();
+        const filter = {_id: id}
+        const update = {$set: 
+            {
+                isDone: isDone,
+                description: description,
+                taskName: taskName,
+                dueDate: dueDate
+            }}
+
+        const result =  await Task.updateOne(filter,update);
+    }
+    catch(error:any){
+        throw new Error(`Failed to update task: ${error.message}`)
     }
 }

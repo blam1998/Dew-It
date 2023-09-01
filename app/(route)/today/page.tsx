@@ -3,7 +3,7 @@ import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
 import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
-import { fetchAllTask, fetchDateTask } from '@/lib/actions/task.actions';
+import {fetchDateTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
 
 
@@ -16,7 +16,7 @@ export default async function Page() {
 
   const date = new Date();
 
-  const allTasks = await fetchDateTask(userId._id, '0', date.toString());
+  const allTasks = await fetchDateTask(userId._id, '1', date.toString());
 
   return (
     <div className = "w-full">
@@ -36,6 +36,7 @@ export default async function Page() {
                   dueDate = {c.dueDate}
                   isDone = {c.isDone}
                   clientId = {"task-"+i.toString()}
+                  callback = {async () => {"use server"; console.log("hi")}}
                 />
               </div>
             )
