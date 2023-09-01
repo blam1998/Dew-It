@@ -104,7 +104,6 @@ export async function updateTaskStatus(
     }
 }
 
-
 export async function deleteTask(id: any){
     try{
         connectToDB();
@@ -153,7 +152,6 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
     }
 }
 
-
 export async function updateTask({id, isDone, description, taskName, dueDate} : {id: mongoose.Types.ObjectId, isDone: boolean, description: string, taskName: string, dueDate: Date}){
     try{
         connectToDB();
@@ -170,5 +168,16 @@ export async function updateTask({id, isDone, description, taskName, dueDate} : 
     }
     catch(error:any){
         throw new Error(`Failed to update task: ${error.message}`)
+    }
+}
+
+export async function fetchTaskById({id} : {id: mongoose.Types.ObjectId}){
+    try{
+        connectToDB();
+        const filter = {_id:id}
+        return Task.findOne(filter);
+    }
+    catch(error:any){
+        throw new Error(`Failed to fetch task by Id: ${error.message}`)
     }
 }

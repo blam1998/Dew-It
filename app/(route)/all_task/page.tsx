@@ -23,16 +23,16 @@ export default async function Page() {
   const allTasks = await fetchAllTask(userId._id);
 
   return (
-    <div className = "w-full">
+    <div className = "w-[100%] bg-gray h-screen">
       <TopBar/>
-      <div className = "flex flex-row gap-4 w-full">
-        <div className = "w-40% h-screen">
+      <div className = "inner-container">
+        <div className = "leftsidebar">
           <LeftSideBar/>
         </div>
-        <div className = "inner-container">
+        <div className = "renderdescription">
           {allTasks?.length !== 0? allTasks?.map((c,i) => {
             return(
-              <div>
+              <div className = "w-[100%]">
                 <RenderDescription 
                   taskName = {c.taskName}
                   description = {c.description}
@@ -46,7 +46,7 @@ export default async function Page() {
           }) : (<div className = "text-black heading1-bold">No Tasks</div>)
         }
         </div>
-        <div className = "w-[33vw]" id = 'rightsidebar'>
+        <div className = "w-[100%]" id = 'rightsidebar' className = "rightsidebar">
 
         </div>
       </div>

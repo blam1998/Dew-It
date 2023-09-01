@@ -78,7 +78,7 @@
 
 @layer components {
   .leftsidebar {
-    @apply fixed left-0 top-0 z-20 flex h-screen bg-black justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-[60];
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-black justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-[12.5vw] box-border;
   }
 
   .topbar {
@@ -86,10 +86,14 @@
   }
 
   .renderdescription{
-    @apply overflow-y-auto justify-between flex flex-row ml-60;
+    @apply overflow-y-auto gap-4 flex flex-row w-[60vw] h-screen box-border flex flex-col;
   }
 
   .inner-container{
-    @apply pl-60 pt-28 h-screen w-full
+    @apply fixed top-0 left-0 pl-[12.5vw] pt-20 w-full flex flex-row gap-1 box-border h-[100%];
+  }
+
+  .rightsidebar{
+    @apply w-[40vw]
   }
 }
