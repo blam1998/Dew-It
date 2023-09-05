@@ -18,6 +18,7 @@ import { Textarea } from "../ui/textarea";
 import mongoose from "mongoose";
 import { updateTask } from "@/lib/actions/task.actions";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 interface Props {
     id: mongoose.Types.ObjectId,
@@ -25,17 +26,17 @@ interface Props {
     description: string,
     taskName: string,
     isDone: boolean,
+    onEdit: Function
 }
 
-function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
+function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) {
+    const date = new Date(dueDate);
+    const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
+
 
     const path = usePathname();
-    
-    console.log(path);
 
-    const date = new Date(dueDate);
 
-    const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
 
     const form = useForm<z.infer<typeof TaskValidation>>({
         resolver: zodResolver(TaskValidation),
@@ -46,11 +47,33 @@ function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
         }
     })
 
+
+    const handleNameKeyInput = (e: any) => {
+        const length = e.target.value.length;
+        const remainder = 100 - length;
+        const target = document.getElementById('name-char-counter');
+
+        if (!target){return}
+
+        target.innerHTML = remainder.toString();
+    }
+
+    const handleDescKeyInput = (e: any) => {
+        const length = e.target.value.length;
+        const remainder = 1000 - length;
+        const target = document.getElementById('desc-char-counter');
+
+        if (!target){return}
+
+        target.innerHTML = remainder.toString();
+    }
+
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
 
         const dueDate = form.getValues().dueDate;
         const description = form.getValues().description;
         const taskName = form.getValues().taskName;
+
 
         const result = customDateSchema.safeParse(dueDate.toString());
 
@@ -66,14 +89,26 @@ function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
         newDate.setDate(dateArray[1]);
         newDate.setFullYear(dateArray[2]);
 
-        await updateTask(
+        const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
+
+        
+        onEdit(
             {
+                taskName: taskName,
+                dueDate: dateString,
+                description: description
+            });
+        
+
+        await updateTask(
+            {...{
                 id: id,
                 dueDate: newDate,
                 taskName: taskName,
                 description: description,
-                isDone: isDone
-            })
+                isDone: isDone,
+                pathName: path
+            }})
     }
 
     return (
@@ -86,13 +121,18 @@ function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="text-black">Task Name</FormLabel>
-                                <FormControl>
+                                <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+
+                        <div className = "flex flex-row justify-end w-[100%]">
+                            <div id = "name-char-counter" className = "text-black right-0"></div>
+                        </div>
+
 
                     <FormField
                         control={form.control}
@@ -114,7 +154,7 @@ function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
                         render={({ field }) => (
                             <FormItem className="mt-10">
                                 <FormLabel className="text-black">Description</FormLabel>
-                                <FormControl>
+                                <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
                                     <Textarea
                                         rows={8}
                                         placeholder="Description" {...field} />
@@ -123,6 +163,10 @@ function EditForm({ id, dueDate, description, taskName, isDone}: Props) {
                             </FormItem>
                         )}
                     />
+                    <div className = "flex flex-row justify-end w-[100%]">
+                        <div id = "desc-char-counter" className = "text-black right-0"></div>
+                    </div>
+
                     <Button type="submit" className="mt-8">Edit Task</Button>
                 </form>
             </Form>

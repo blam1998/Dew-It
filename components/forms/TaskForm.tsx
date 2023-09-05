@@ -16,12 +16,14 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
 import { addTask } from "@/lib/actions/task.actions";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 
 
 function TaskForm( {user} : {user: String}){
     const router = useRouter();
+    const pathName = usePathname();
     const date = new Date();
 
     const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
@@ -34,6 +36,26 @@ function TaskForm( {user} : {user: String}){
           description: '',
         }
     })
+
+    const handleNameKeyInput = (e: any) => {
+        const length = e.target.value.length;
+        const remainder = 100 - length;
+        const target = document.getElementById('name-char-counter');
+
+        if (!target){return}
+
+        target.innerHTML = remainder.toString();
+    }
+
+    const handleDescKeyInput = (e: any) => {
+        const length = e.target.value.length;
+        const remainder = 1000 - length;
+        const target = document.getElementById('desc-char-counter');
+
+        if (!target){return}
+
+        target.innerHTML = remainder.toString();
+    }
 
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
         if (!user){return}
@@ -61,10 +83,15 @@ function TaskForm( {user} : {user: String}){
             dueDate : newDate,
             description: description,
             taskName: taskName,
-            userId: user
+            userId: user,
+            pathName: pathName
         });
 
-        router.push('/all_task');
+        const target = document.getElementById('task-form-submit');
+
+
+        window.location.reload();
+        router.push('/add_task');
     }
 
     return(
@@ -78,13 +105,16 @@ function TaskForm( {user} : {user: String}){
                         render={({ field }) => (
                             <FormItem>
                             <FormLabel className = "text-white">Task Name</FormLabel>
-                            <FormControl>
+                            <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
                                 <Input placeholder="Task Name" {...field} className = "bg-white" />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                         />
+                        <div className = "flex flex-row justify-end w-[100%]">
+                            <div id = "name-char-counter" className = "text-white right-0"></div>
+                        </div>
 
                         <FormField
                         control={form.control}
@@ -106,16 +136,20 @@ function TaskForm( {user} : {user: String}){
                         render={({ field }) => (
                             <FormItem className = "mt-10">
                             <FormLabel className = "text-white">Description</FormLabel>
-                            <FormControl>
+                            <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
                                 <Textarea
                                 rows = {8}
-                                placeholder="Description" {...field}/>
+                                placeholder="Description" {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                         />
-                        <Button type="submit" className = "mt-8">Add Task</Button>
+                        <div className = "flex flex-row justify-end w-[100%]">
+                            <div id = "desc-char-counter" className = "text-white right-0"></div>
+                        </div>
+                        <Button type="submit" className = "mt-8" id = 'task-form-submit'>Add Task</Button>
                     </form>
                 </div>
             </Form>

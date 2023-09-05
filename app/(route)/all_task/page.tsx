@@ -6,11 +6,8 @@ import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchAllTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
-
-export async function renderDescription(){
-  "use server";
-  console.log("Hi");
-}
+import EditForm from '@/components/forms/EditForm';
+import mongoose from 'mongoose';
 
 
 export default async function Page() {
@@ -46,8 +43,7 @@ export default async function Page() {
           }) : (<div className = "text-black heading1-bold">No Tasks</div>)
         }
         </div>
-        <div className = "w-[100%]" id = 'rightsidebar' className = "rightsidebar">
-
+        <div className = "w-[33vw] bg-white" id = 'rightsidebar'>
         </div>
       </div>
     </div>

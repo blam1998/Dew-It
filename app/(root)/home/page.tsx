@@ -26,7 +26,7 @@ export default async function Page() {
     <main>
       <TopBar/>
       <SignedIn>
-        <main className = "flex flex-row gap-4">
+        <main className = "flex flex-row gap-4 leftsidebar">
           <LeftSideBar/>
         </main>
       </SignedIn>

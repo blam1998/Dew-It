@@ -1,17 +1,18 @@
 "use server"
-import { revalidatePath } from 'next/cache';
+
 import {connectToDB} from '../mongoose';
 import { FilterQuery, SortOrder } from 'mongoose';
 import User from '../models/user.model';
 import Task from '../models/task.model';
 import mongoose from "mongoose";
-import { ObjectId } from 'mongoose';
+import { revalidatePath } from 'next/cache';
 
 interface Props{
     userId: mongoose.Schema.Types.ObjectId,
     dueDate: string,
     taskName: string,
-    description: string
+    description: string,
+    pathName: string
 }
 
 
@@ -19,7 +20,8 @@ export async function addTask({
     userId,
     dueDate,
     description,
-    taskName
+    taskName,
+    pathName
 } : Props){
     try{
         connectToDB();
@@ -35,6 +37,8 @@ export async function addTask({
 
         await User.findByIdAndUpdate(userId,
             {$push: {tasks: task}})
+        
+        revalidatePath(pathName);
     }
     catch(error:any){
         throw new Error(`Error adding task: ${error.message}`);
@@ -152,16 +156,25 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
     }
 }
 
-export async function updateTask({id, isDone, description, taskName, dueDate} : {id: mongoose.Types.ObjectId, isDone: boolean, description: string, taskName: string, dueDate: Date}){
+interface update_Params{
+    id: mongoose.Types.ObjectId,
+    isDone: boolean, 
+    description: string, 
+    taskName: string, 
+    dueDate: Date,
+    pathName: string
+}
+
+export async function updateTask( data : update_Params){
     try{
         connectToDB();
-        const filter = {_id: id}
+        const filter = {_id: data.id}
         const update = {$set: 
             {
-                isDone: isDone,
-                description: description,
-                taskName: taskName,
-                dueDate: dueDate
+                isDone: data.isDone,
+                description: data.description,
+                taskName: data.taskName,
+                dueDate: data.dueDate
             }}
 
         const result =  await Task.updateOne(filter,update);

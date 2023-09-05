@@ -7,6 +7,7 @@ import {fetchDateTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
 
 
+
 export default async function Page() {
   const user = await currentUser();
 
@@ -19,16 +20,16 @@ export default async function Page() {
   const allTasks = await fetchDateTask(userId._id, '1', date.toString());
 
   return (
-    <div className = "w-full">
+    <div className = "w-[100%] bg-gray h-screen">
       <TopBar/>
-      <div className = "flex flex-row gap-4 w-full">
-        <div className = "w-40% h-screen">
+      <div className = "inner-container">
+        <div className = "leftsidebar">
           <LeftSideBar/>
         </div>
-        <div className = "flex flex-col text-black">
+        <div className = "renderdescription">
           {allTasks?.length !== 0? allTasks?.map((c,i) => {
             return(
-              <div>
+              <div className = "w-[100%]">
                 <RenderDescription 
                   taskName = {c.taskName}
                   description = {c.description}
@@ -36,12 +37,13 @@ export default async function Page() {
                   dueDate = {c.dueDate}
                   isDone = {c.isDone}
                   clientId = {"task-"+i.toString()}
-                  callback = {async () => {"use server"; console.log("hi")}}
                 />
               </div>
             )
-          }) : <div className = "text-black heading1-bold mt-28 ml-60">No Tasks</div>
+          }) : (<div className = "text-black heading1-bold">No Tasks</div>)
         }
+        </div>
+        <div className = "w-[33vw] bg-white" id = 'rightsidebar'>
         </div>
       </div>
     </div>

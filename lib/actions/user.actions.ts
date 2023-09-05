@@ -57,8 +57,6 @@ export async function addNewUser({
     }
 }
 
-
-
 export async function fetchUser(id: string){
     try{
         connectToDB();

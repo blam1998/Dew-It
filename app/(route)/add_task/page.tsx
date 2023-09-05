@@ -15,8 +15,10 @@ export default async function Page() {
   return (
     <main>
       <TopBar/>
-      <main className = "flex flex-row bg-dark-blue w-full">
-        <LeftSideBar/>
+      <main className = "inner-container bg-dark-blue">
+        <div className = "leftsidebar">
+          <LeftSideBar/>
+        </div>
         <TaskForm user = {userId._id}/>
       </main>
     </main>
