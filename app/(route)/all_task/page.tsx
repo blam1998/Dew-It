@@ -13,6 +13,7 @@ import mongoose from 'mongoose';
 export default async function Page() {
   const user = await currentUser();
 
+
   if (!user){return}
 
   const userId = await fetchUser(user.id)

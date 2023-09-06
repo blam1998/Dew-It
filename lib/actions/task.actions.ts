@@ -94,13 +94,14 @@ export async function fetchAllCompletedTask(userId: {userId: mongoose.Schema.Typ
 }
 
 export async function updateTaskStatus(
-    id: any, isDone: boolean){
+    id: any, isDone: boolean, path: string){
     try{
         connectToDB();
         const filter = {_id: id}
         const update = {$set: {isDone: !isDone}}
 
         const result =  await Task.updateOne(filter,update);
+        revalidatePath(path);
 
     }
     catch(error:any){
@@ -108,13 +109,14 @@ export async function updateTaskStatus(
     }
 }
 
-export async function deleteTask(id: any){
+export async function deleteTask(id: any, path: string){
     try{
         connectToDB();
         const target = new mongoose.Types.ObjectId(id)
         const filter =  {_id: id}
         const job = await Task.deleteOne(filter);
 
+        revalidatePath(path);
     }
     catch(error:any){
         throw new Error(`Failed to delete task: ${error.message}`)
@@ -178,6 +180,8 @@ export async function updateTask( data : update_Params){
             }}
 
         const result =  await Task.updateOne(filter,update);
+        
+        revalidatePath(data.pathName);
     }
     catch(error:any){
         throw new Error(`Failed to update task: ${error.message}`)

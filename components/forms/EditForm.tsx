@@ -17,7 +17,6 @@ import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
 import mongoose from "mongoose";
 import { updateTask } from "@/lib/actions/task.actions";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 interface Props {
@@ -26,17 +25,23 @@ interface Props {
     description: string,
     taskName: string,
     isDone: boolean,
-    onEdit: Function
+    onEdit: Function,
+    path: string
 }
 
-function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) {
+function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: Props) {
     const date = new Date(dueDate);
+    date.setHours(0,0,0,0);
+    var pastDue = false;
+    const currDate = new Date();
+
+    currDate.setHours(0,0,0,0);
+
+    if (currDate > date){
+        pastDue = true;
+    }
+
     const customDate = (date.getMonth() + 1).toString() + "-" + date.getDate().toString() + "-" + date.getFullYear().toString();
-
-
-    const path = usePathname();
-
-
 
     const form = useForm<z.infer<typeof TaskValidation>>({
         resolver: zodResolver(TaskValidation),
@@ -100,6 +105,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) 
             });
         
 
+
         await updateTask(
             {...{
                 id: id,
@@ -112,9 +118,10 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) 
     }
 
     return (
-        <div className="flex flex-col items-center ml-auto mr-auto w-[100%] h-screen">
+        <div className="flex flex-col items-center p-8 w-[100%] h-screen">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
+                    {pastDue? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
                     <FormField
                         control={form.control}
                         name="taskName"
@@ -138,7 +145,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) 
                         control={form.control}
                         name="dueDate"
                         render={({ field }) => (
-                            <FormItem className="mt-10 text-black">
+                            <FormItem className="mt-4 text-black">
                                 <FormLabel className="text-black">Due Date</FormLabel>
                                 <FormControl>
                                     <Input placeholder="MM-DD-YYYY" {...field} className="bg-white" />
@@ -156,7 +163,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit}: Props) 
                                 <FormLabel className="text-black">Description</FormLabel>
                                 <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
                                     <Textarea
-                                        rows={8}
+                                        rows={16}
                                         placeholder="Description" {...field} />
                                 </FormControl>
                                 <FormMessage />

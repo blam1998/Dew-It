@@ -78,7 +78,7 @@
 
 @layer components {
   .leftsidebar {
-    @apply fixed left-0 top-0 z-20 flex h-screen bg-black justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-[12.5vw] box-border;
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-primary justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 w-[12.5vw] box-border;
   }
 
   .topbar {
@@ -86,7 +86,7 @@
   }
 
   .renderdescription{
-    @apply overflow-y-auto gap-4 flex flex-row w-[60vw] h-screen box-border flex flex-col;
+    @apply overflow-y-auto gap-1 flex flex-row w-[60vw] h-screen box-border flex flex-col;
   }
 
   .inner-container{
@@ -95,5 +95,9 @@
 
   .rightsidebar{
     @apply w-[40vw]
+  }
+
+  .taskName{
+    @apply text-heading3-semibold ml-2 cursor-pointer h-fit w-[100%] bg-light-gray p-1 overflow-hidden
   }
 }

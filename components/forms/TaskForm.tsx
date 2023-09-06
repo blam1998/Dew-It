@@ -106,7 +106,7 @@ function TaskForm( {user} : {user: String}){
                             <FormItem>
                             <FormLabel className = "text-white">Task Name</FormLabel>
                             <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
-                                <Input placeholder="Task Name" {...field} className = "bg-white" />
+                                <Input placeholder="Task Name" {...field} className = "bg-white"/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
