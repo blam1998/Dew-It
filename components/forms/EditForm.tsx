@@ -96,13 +96,14 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
 
         const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
-        
+        /*
         onEdit(
             {
                 taskName: taskName,
                 dueDate: dateString,
                 description: description
             });
+        */
         
 
 

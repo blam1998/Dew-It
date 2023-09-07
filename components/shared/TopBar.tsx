@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {UserButton} from "@clerk/nextjs";
 
-const TopBar = () => {
+const TopBar = (user: any) => {
     return(
         <section className = "topbar">
             <Link href = "/" className = "flex items-left pl-4">

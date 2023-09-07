@@ -30,7 +30,7 @@ export default async function Page() {
         <div className = "renderdescription">
           {allTasks?.length !== 0? allTasks?.map((c,i) => {
             return(
-              <div className = "w-[100%]">
+              <div className = "w-[100%]" id = {"task-" + i.toString()}>
                 <RenderDescription 
                   taskName = {c.taskName}
                   description = {c.description}
@@ -41,7 +41,7 @@ export default async function Page() {
                 />
               </div>
             )
-          }) : (<div className = "text-black heading1-bold">No Tasks</div>)
+          }) : (<div className = "noTask">No Tasks This Week</div>)
         }
         </div>
         <div className = "w-[33vw] bg-white" id = 'rightsidebar'>

@@ -86,7 +86,7 @@
   }
 
   .renderdescription{
-    @apply overflow-y-auto gap-1 flex flex-row w-[60vw] h-screen box-border flex flex-col;
+    @apply overflow-y-auto gap-1 flex flex-row w-[60vw] h-full pb-[20px] box-border flex flex-col;
   }
 
   .inner-container{
@@ -98,6 +98,14 @@
   }
 
   .taskName{
-    @apply text-heading3-semibold ml-2 cursor-pointer h-fit w-[100%] bg-light-gray p-1 overflow-hidden
+    @apply text-body-semibold ml-2 cursor-pointer h-fit w-[100%] p-2 overflow-hidden
+  }
+
+  .taskDate{
+    @apply text-body-semibold ml-2 h-fit w-[100%] p-2 overflow-hidden text-center
+  }
+
+  .noTask{
+    @apply text-body-semibold ml-2 h-fit p-2
   }
 }

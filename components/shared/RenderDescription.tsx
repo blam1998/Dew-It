@@ -28,23 +28,30 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     const [currDueDate, setCurrDueDate] = useState(jsDate);
     const currDate = new Date();
 
+    const dateString = (jsDate.getMonth() + 1) + "-" + jsDate.getDate() + "-" + jsDate.getFullYear();
+
     currDate.setHours(0,0,0,0);
     
     if (currDate > jsDate){
         pastDue = true;
     }
 
-
+    const cleanUp = async (id:string) => {
+        const target = document.getElementById(id);
+        target?.remove();
+    }
 
 
     const completeHandler = async () => {
         await updateTaskStatus(id, isDone, path);
-        window.location.reload();
+        await cleanUp(clientId);
+        //window.location.reload();
     }
 
     const deleteHandler = async () => {
         await deleteTask(id, path);
-        window.location.reload();
+        await cleanUp(clientId);
+        //window.location.reload();
     }
 
     const handleNameChange = (data : any) => {
@@ -68,16 +75,19 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`text-black heading1-bold flex flex-row w-auto bg-white ml-1 mt-1`} id = {clientId}>
-            <div className = "bg-white p-2 w-[90%] cursor-pointer">
-                <div className = {`${pastDue? "text-dark-red" : "text-black"} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
+        <div className = {`text-black flex flex-row w-auto bg-white`}>
+            <div className = "bg-white p-2 w-[80%] cursor-pointer">
+                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
+            </div>
+            <div className = "bg-white p-2 w-[15%]">
+                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`} onClick = {() => descriptionHandler()}>{dateString}</div>
             </div>
             <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
-                {!isDone? (<Image src = "/assets/check-mark.svg" alt = "Complete" width = {28} height = {28}/>) 
-                : (<Image src = "/assets/incomplete.svg" alt = "check mark" width = {28} height = {28}/>)}
+                {!isDone? (<Image src = "/assets/check-mark.svg" title = "Mark as complete" alt = "Complete" width = {28} height = {28}/>) 
+                : (<Image src = "/assets/incomplete.svg" title = "Mark as incomplete" alt = "Incomplete" width = {28} height = {28}/>)}
             </div>
             <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => deleteHandler()}>
-                <Image src = "/assets/trash-can.svg" alt = "Delete" width = {28} height = {28}/>
+                <Image src = "/assets/trash-can.svg" title = "Delete" alt = "Delete" width = {28} height = {28}/>
             </div>
         </div>
     )
