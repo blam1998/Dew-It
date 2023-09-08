@@ -4,11 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { fetchUser } from '@/lib/actions/user.actions';
+import { fetchAllTask } from '@/lib/actions/task.actions';
+import { useState } from 'react';
+import mongoose from 'mongoose';
 
 
-const LeftSideBar = () => {
-
+const LeftSideBar = (data : any) => {
     const path = usePathname();
+    if (!data){return}
 
     return(
         <div>

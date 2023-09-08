@@ -96,14 +96,14 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
 
         const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
-        /*
+        
         onEdit(
             {
                 taskName: taskName,
                 dueDate: dateString,
                 description: description
             });
-        */
+        
         
 
 
@@ -122,7 +122,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         <div className="flex flex-col items-center p-8 w-[100%] h-screen">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
-                    {pastDue? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
+                    {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
                     <FormField
                         control={form.control}
                         name="taskName"

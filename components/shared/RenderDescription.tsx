@@ -1,12 +1,9 @@
 "use client"
-import Task from "@/lib/models/task.model";
-import { updateTaskStatus, deleteTask } from "@/lib/actions/task.actions";
-import { useRouter } from "next/navigation";
+import { updateTaskStatus, deleteTask, fetchAllTask } from "@/lib/actions/task.actions";
 import mongoose from "mongoose";
 import React, { useState } from 'react';
 import EditForm from "../forms/EditForm";
 import ReactDOM from 'react-dom';
-import { fetchTaskById } from "@/lib/actions/task.actions";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -17,9 +14,10 @@ interface Props{
     description: string,
     id: mongoose.Types.ObjectId,
     clientId: string,
+    userId: mongoose.Types.ObjectId
 }
 
-const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId} : Props) => {
+const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId, userId} : Props) => {
     const path = usePathname();
     const jsDate = new Date(dueDate);
     var pastDue = false;
@@ -38,19 +36,21 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
     const cleanUp = async (id:string) => {
         const target = document.getElementById(id);
+        if (!target){return}
         target?.remove();
     }
 
 
     const completeHandler = async () => {
         await updateTaskStatus(id, isDone, path);
-        await cleanUp(clientId);
+        //await cleanUp(clientId);
         //window.location.reload();
     }
 
     const deleteHandler = async () => {
+        console.log(task)
         await deleteTask(id, path);
-        await cleanUp(clientId);
+        //await cleanUp(clientId);
         //window.location.reload();
     }
 
@@ -75,7 +75,7 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`text-black flex flex-row w-auto bg-white`}>
+        <div className = {`text-black flex flex-row w-auto bg-white`} key = {clientId}>
             <div className = "bg-white p-2 w-[80%] cursor-pointer">
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
             </div>

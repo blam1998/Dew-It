@@ -45,8 +45,9 @@ export async function addTask({
     }
 }
 
-export async function fetchAllTask(userId : {userId: mongoose.Schema.Types.ObjectId}){
+export async function fetchAllTask(userId : {userId: mongoose.Types.ObjectId}){
     try{
+
         connectToDB();
         const currUserTasks = Task.find({author: {$in:[userId]}})
         .find({isDone: {$in:[false]}})
@@ -101,6 +102,7 @@ export async function updateTaskStatus(
         const update = {$set: {isDone: !isDone}}
 
         const result =  await Task.updateOne(filter,update);
+        await revalidatePath(path);
     }
     catch(error:any){
         throw new Error(`Failed to update task status: ${error.message}`)
@@ -113,6 +115,18 @@ export async function deleteTask(id: any, path: string){
         const target = new mongoose.Types.ObjectId(id)
         const filter =  {_id: id}
         const job = await Task.deleteOne(filter);
+
+        //new Code
+        const taskQuery = await Task.find(filter)
+        console.log(taskQuery);
+        if (taskQuery){
+            const author = taskQuery
+            console.log(author);
+            await User.findByIdAndUpdate(author, 
+                {$pull: {tasks: id}})
+        }
+
+        revalidatePath(path);
     }
     catch(error:any){
         throw new Error(`Failed to delete task: ${error.message}`)
@@ -176,19 +190,9 @@ export async function updateTask( data : update_Params){
             }}
 
         const result =  await Task.updateOne(filter,update);
+        revalidatePath(data.pathName);
     }
     catch(error:any){
         throw new Error(`Failed to update task: ${error.message}`)
-    }
-}
-
-export async function fetchTaskById({id} : {id: mongoose.Types.ObjectId}){
-    try{
-        connectToDB();
-        const filter = {_id:id}
-        return Task.findOne(filter);
-    }
-    catch(error:any){
-        throw new Error(`Failed to fetch task by Id: ${error.message}`)
     }
 }
