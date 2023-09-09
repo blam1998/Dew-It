@@ -8,8 +8,8 @@ import mongoose from "mongoose";
 import { revalidatePath } from 'next/cache';
 
 interface Props{
-    userId: mongoose.Schema.Types.ObjectId,
-    dueDate: string,
+    userId: String,
+    dueDate: Date,
     taskName: string,
     description: string,
     pathName: string
@@ -109,22 +109,16 @@ export async function updateTaskStatus(
     }
 }
 
-export async function deleteTask(id: any, path: string){
+export async function deleteTask(id: string, path: string, userId: string){
     try{
         connectToDB();
-        const target = new mongoose.Types.ObjectId(id)
         const filter =  {_id: id}
         const job = await Task.deleteOne(filter);
 
         //new Code
-        const taskQuery = await Task.find(filter)
-        console.log(taskQuery);
-        if (taskQuery){
-            const author = taskQuery
-            console.log(author);
-            await User.findByIdAndUpdate(author, 
-                {$pull: {tasks: id}})
-        }
+        const userDelete = await User.findByIdAndUpdate({_id: userId},
+            {$pull: {tasks: id}})
+        
 
         revalidatePath(path);
     }

@@ -90,9 +90,9 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         const dateArray = dueDate.split('-');
 
         const newDate = new Date();
-        newDate.setMonth(dateArray[0] - 1);
-        newDate.setDate(dateArray[1]);
-        newDate.setFullYear(dateArray[2]);
+        newDate.setMonth(Number(dateArray[0]) - 1);
+        newDate.setDate(Number(dateArray[1]));
+        newDate.setFullYear(Number(dateArray[2]));
 
         const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
@@ -119,7 +119,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
     }
 
     return (
-        <div className="flex flex-col items-center p-8 w-[100%] h-screen">
+        <div className="flex flex-col items-center p-8 w-[100%] h-screen bg-dark-4">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
                     {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
@@ -128,7 +128,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         name="taskName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-black">Task Name</FormLabel>
+                                <FormLabel className="text-white">Task Name</FormLabel>
                                 <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
@@ -147,7 +147,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         name="dueDate"
                         render={({ field }) => (
                             <FormItem className="mt-4 text-black">
-                                <FormLabel className="text-black">Due Date</FormLabel>
+                                <FormLabel className="text-white">Due Date</FormLabel>
                                 <FormControl>
                                     <Input placeholder="MM-DD-YYYY" {...field} className="bg-white" />
                                 </FormControl>
@@ -161,7 +161,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         name="description"
                         render={({ field }) => (
                             <FormItem className="mt-10">
-                                <FormLabel className="text-black">Description</FormLabel>
+                                <FormLabel className="text-white">Description</FormLabel>
                                 <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
                                     <Textarea
                                         rows={16}
@@ -175,7 +175,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         <div id = "desc-char-counter" className = "text-black right-0"></div>
                     </div>
 
-                    <Button type="submit" className="mt-8">Edit Task</Button>
+                    <Button type="submit" className="mt-8 bg-primary-500 hover:bg-primary-500">Edit Task</Button>
                 </form>
             </Form>
         </div>

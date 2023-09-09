@@ -44,7 +44,7 @@ export default async function Page() {
           }) : (<div className = "noTask">No Tasks Today</div>)
         }
         </div>
-        <div className = "w-[33vw] bg-white" id = 'rightsidebar'>
+        <div className = "w-[40vw] bg-dark-4" id = 'rightsidebar'>
         </div>
       </div>
     </div>

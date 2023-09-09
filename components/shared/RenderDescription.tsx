@@ -3,9 +3,11 @@ import { updateTaskStatus, deleteTask, fetchAllTask } from "@/lib/actions/task.a
 import mongoose from "mongoose";
 import React, { useState } from 'react';
 import EditForm from "../forms/EditForm";
-import ReactDOM from 'react-dom';
+import ReactDOM, { hydrate } from 'react-dom';
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
 interface Props{
     taskName: string,
@@ -18,6 +20,7 @@ interface Props{
 }
 
 const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId, userId} : Props) => {
+    const router = useRouter();
     const path = usePathname();
     const jsDate = new Date(dueDate);
     var pastDue = false;
@@ -34,24 +37,12 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
         pastDue = true;
     }
 
-    const cleanUp = async (id:string) => {
-        const target = document.getElementById(id);
-        if (!target){return}
-        target?.remove();
-    }
-
-
     const completeHandler = async () => {
         await updateTaskStatus(id, isDone, path);
-        //await cleanUp(clientId);
-        //window.location.reload();
     }
 
     const deleteHandler = async () => {
-        console.log(task)
-        await deleteTask(id, path);
-        //await cleanUp(clientId);
-        //window.location.reload();
+        await deleteTask(id.toString(), path, userId.toString());
     }
 
     const handleNameChange = (data : any) => {
@@ -61,22 +52,20 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     }
 
     const descriptionHandler = () => {
-        const target = document.getElementById('rightsidebar');
+        const container = document.getElementById('rightsidebar');
+        const root = container? createRoot(container) : null  
 
-        if (!target){return}
-        ReactDOM.unmountComponentAtNode(target);
-        ReactDOM.render(
-        <div className = {`text-black heading1-bold renderdescription w-[100%] h-screen bg-white`} id = {`description-${clientId}`}>
-            <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
-        </div>
-        , target);
+        root? root.render(
+            <div className = {`text-black heading1-bold renderdescription w-[100%] h-screen bg-white`} id = {`description-${clientId}`}>
+                <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
+            </div>) : null
     }
 
 
 
     return(
-        <div className = {`text-black flex flex-row w-auto bg-white`} key = {clientId}>
-            <div className = "bg-white p-2 w-[80%] cursor-pointer">
+        <div className = {`text-black flex flex-row w-auto bg-white flex-nowrap`} key = {clientId}>
+            <div className = "bg-white p-2 w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
             </div>
             <div className = "bg-white p-2 w-[15%]">

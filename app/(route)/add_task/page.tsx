@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <main>
       <TopBar/>
-      <main className = "inner-container bg-dark-blue">
+      <main className = "inner-container bg-dark-1">
         <div className = "leftsidebar">
           <LeftSideBar/>
         </div>

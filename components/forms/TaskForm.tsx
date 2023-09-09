@@ -138,7 +138,7 @@ function TaskForm( {user} : {user: String}){
                             <FormLabel className = "text-white">Description</FormLabel>
                             <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
                                 <Textarea
-                                rows = {8}
+                                rows = {10}
                                 placeholder="Description" {...field}
                                 />
                             </FormControl>
@@ -149,7 +149,7 @@ function TaskForm( {user} : {user: String}){
                         <div className = "flex flex-row justify-end w-[100%]">
                             <div id = "desc-char-counter" className = "text-white right-0"></div>
                         </div>
-                        <Button type="submit" className = "mt-8" id = 'task-form-submit'>Add Task</Button>
+                        <Button type="submit" className = "mt-8 bg-primary-500 hover:bg-primary-500" id = 'task-form-submit'>Add Task</Button>
                     </form>
                 </div>
             </Form>

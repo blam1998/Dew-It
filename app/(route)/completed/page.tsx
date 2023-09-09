@@ -5,7 +5,6 @@ import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchAllTask, fetchAllCompletedTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
-import { revalidatePath } from 'next/cache';
 
 
 export default async function Page() {
@@ -42,7 +41,7 @@ export default async function Page() {
           }) : (<div className = "noTask">No Tasks Completed</div>)
         }
         </div>
-        <div className = "w-[33vw] bg-white" id = 'rightsidebar'>
+        <div className = "w-[40vw] bg-dark-4" id = 'rightsidebar'>
         </div>
       </div>
     </div>

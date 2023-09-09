@@ -3,12 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {UserButton} from "@clerk/nextjs";
 
-const TopBar = (user: any) => {
+const TopBar = () => {
     return(
         <section className = "topbar">
             <Link href = "/" className = "flex items-left pl-4">
-                <Image src = "/next.svg" alt = "Icon" width = {48} height = {48}/>
-                <h1 className = "text-heading1-bold text-white p-4">K List</h1>
+                <div className = "flex items-center">
+                    <Image src = "/assets/logo.png" alt = "Icon" width = {48} height = {16}/>
+                    <h1 className = "text-heading2-semibold text-white p-4">Dew it</h1>
+                </div>
             </Link>
             <UserButton afterSignOutUrl="/sign-in"/>
         </section>

@@ -109,6 +109,12 @@ module.exports = {
         "dark-red": "#FF0000",
         "light-gray": "#faf5f5",
         "dark-green": "#04D213",
+        "dark-1": "#000000",
+        "dark-2": "#121417",
+        "dark-3": "#101012",
+        "dark-4": "#1F1F22",
+        "primary-500": "#877EFF",
+        glassmorphism: "rgba(16, 16, 18, 0.60)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -142,6 +148,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      screens: {
+        xs: "400px",
       },
       borderRadius: {
         lg: "var(--radius)",

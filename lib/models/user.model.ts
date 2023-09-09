@@ -28,8 +28,22 @@ const userSchema = new mongoose.Schema({
             ref: 'Task'
         }
     ],
+    taskStats: {
+        allTask:{
+            type: String,
+        },
+        taskDone: {
+            type: String,
+        },
+        taskToday: {
+            type: String,
+        },
+        taskThisWeek:{
+            type: String
+        }
+    }
 });
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const User =  mongoose.models.User || mongoose.model('User', userSchema);
 
 export default User;

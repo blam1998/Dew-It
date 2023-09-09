@@ -24,13 +24,15 @@ export default async function Page() {
   }
 
   return (
-    <main>
-      <TopBar user = {user}/>
+    <div className = "bg-dark-4">
+      <TopBar/>
       <SignedIn>
-        <main className = "flex flex-row gap-4 leftsidebar">
-          <LeftSideBar/>
-        </main>
+        <div className = "inner-container">
+          <main className = "flex flex-row gap-4 leftsidebar">
+            <LeftSideBar/>
+          </main>
+        </div>
       </SignedIn>
-    </main>
+    </div>
   )
 }
