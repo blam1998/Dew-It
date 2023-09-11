@@ -4,6 +4,7 @@ import LeftSideBar from '@/components/shared/LeftSideBar';
 import  TaskForm  from '@/components/forms/TaskForm';
 import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
+import MobileMenu from '@/components/shared/MobileMenu';
 
 export default async function Page() {
   const user = await currentUser();
@@ -16,10 +17,13 @@ export default async function Page() {
     <main>
       <TopBar/>
       <main className = "inner-container bg-dark-1">
-        <div className = "leftsidebar">
+        <div className = "leftsidebar hidden md:block">
           <LeftSideBar/>
         </div>
-        <TaskForm user = {userId._id}/>
+        <div className = "mobile-menu block md:hidden">
+          <MobileMenu />
+        </div>
+        <TaskForm user = {userId._id.toString()}/>
       </main>
     </main>
   )

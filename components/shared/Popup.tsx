@@ -26,10 +26,11 @@ interface Props {
     taskName: string,
     isDone: boolean,
     onEdit: Function,
-    path: string
+    path: string,
+    clientId: string
 }
 
-function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: Props) {
+function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clientId}: Props) {
     const date = new Date(dueDate);
     date.setHours(0,0,0,0);
     var pastDue = false;
@@ -51,6 +52,12 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
             description: description,
         }
     })
+
+    const handleClose = () => {
+        const target = document.getElementById(clientId + "-description")
+        console.log(target)
+        target? target.style.display = 'none' : null
+    }
 
 
     const handleNameKeyInput = (e: any) => {
@@ -119,8 +126,9 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
     }
 
     return (
-        <div className="flex flex-col items-center p-8 w-[100%] h-screen bg-dark-4">
+        <div className="flex flex-col items-center p-[2rem] xsm:p-[4rem] pb-20  xsm:pb-40 w-[100vw] overflow-auto h-screen bg-dark-4 border-box relative" key = {id.toString()} id = {clientId + "-description"}>
             <Form {...form}>
+                <div className = "text-white absolute top-12 right-12" onClick = {() => handleClose()}>Close Here</div>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
                     {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
                     <FormField
@@ -182,4 +190,4 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
     )
 }
 
-export default EditForm;
+export default Popup;

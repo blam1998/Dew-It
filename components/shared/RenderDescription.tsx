@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import Popup from "./Popup";
 
 interface Props{
     taskName: string,
@@ -27,6 +28,8 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     const [task, setTask] = useState(taskName)
     const [currDesc, setCurrDesc] = useState(description)
     const [currDueDate, setCurrDueDate] = useState(jsDate);
+    const [popup, setPopup] = useState(false);
+    var myRoot:any = null
     const currDate = new Date();
 
     const dateString = (jsDate.getMonth() + 1) + "-" + jsDate.getDate() + "-" + jsDate.getFullYear();
@@ -35,6 +38,10 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     
     if (currDate > jsDate){
         pastDue = true;
+    }
+
+    const popupHandler = () => {
+        setPopup(!popup);
     }
 
     const completeHandler = async () => {
@@ -52,23 +59,40 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     }
 
     const descriptionHandler = () => {
-        const container = document.getElementById('rightsidebar');
-        const root = container? createRoot(container) : null  
+        var root2:any = null
+        var root: any = null
 
+
+        const container = document.getElementById('rightsidebar');
+        root = container? createRoot(container) : null
+
+        
         root? root.render(
-            <div className = {`text-black heading1-bold renderdescription w-[100%] h-screen bg-white`} id = {`description-${clientId}`}>
+            <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white`} id = {`description-${clientId}`}>
                 <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
             </div>) : null
+        
+        
+        
+
+        const container2 = document.getElementById('rightsidebar-mobile');
+        root2 = container2? createRoot(container2) : null
+
+        root2? root2.render(
+            <Popup id = {id} description = {currDesc} taskName = {task} isDone = {isDone} 
+            dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}
+            clientId = {clientId}/>
+        ) : null
     }
 
 
 
     return(
         <div className = {`text-black flex flex-row w-auto bg-white flex-nowrap`} key = {clientId}>
-            <div className = "bg-white p-2 w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
+            <div className = "bg-white p-2 w-[50%] xsm:w-[60%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
             </div>
-            <div className = "bg-white p-2 w-[15%]">
+            <div className = "bg-white p-2 w-[50%] xsm:w-[40%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`} onClick = {() => descriptionHandler()}>{dateString}</div>
             </div>
             <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>

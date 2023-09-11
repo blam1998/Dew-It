@@ -9,6 +9,7 @@ import RenderDescription from '@/components/shared/RenderDescription';
 import EditForm from '@/components/forms/EditForm';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
+import MobileMenu from '@/components/shared/MobileMenu';
 
 
 export default async function Page() {
@@ -24,8 +25,11 @@ export default async function Page() {
     <div className = "w-[100%] bg-gray h-screen">
       <TopBar/>
       <div className = "inner-container">
-        <div className = "leftsidebar">
-          <LeftSideBar id = {userId._id.toString()}/>
+        <div className = "leftsidebar hidden md:block">
+          <LeftSideBar />
+        </div>
+        <div className = "mobile-menu block md:hidden">
+          <MobileMenu />
         </div>
         <div className = "renderdescription">
         {allTasks?.length !== 0? allTasks?.map((c,i) => {
@@ -45,7 +49,9 @@ export default async function Page() {
           }) : (<div className = "noTask">No Tasks</div>)
         }
         </div>
-        <div className = "w-[40vw] bg-dark-4" id = 'rightsidebar'>
+        <div className = "hidden sm:block sm:w-[50vw] md:w-[40vw] bg-dark-4" id = 'rightsidebar'>
+        </div>
+        <div className = "block sm:hidden absolute" id = 'rightsidebar-mobile'>
         </div>
       </div>
     </div>

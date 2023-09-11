@@ -74,9 +74,9 @@ function TaskForm( {user} : {user: String}){
         const dateArray = dueDate.split('-');
         
         const newDate = new Date();
-        newDate.setMonth(dateArray[0] - 1);
-        newDate.setDate(dateArray[1]);
-        newDate.setFullYear(dateArray[2]);
+        newDate.setMonth(Number(dateArray[0]) - 1);
+        newDate.setDate(Number(dateArray[1]));
+        newDate.setFullYear(Number(dateArray[2]));
 
 
         await addTask({
@@ -95,7 +95,7 @@ function TaskForm( {user} : {user: String}){
     }
 
     return(
-        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen" style={{width: "50%"}}>
+        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen w-[80%]">
             <Form {...form}>
                 <div className = "w-full mt-10">
                     <form onSubmit={form.handleSubmit(onSubmit)}>

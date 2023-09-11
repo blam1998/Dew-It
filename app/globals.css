@@ -81,20 +81,24 @@
     @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-4 justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 pl-5 pr-5 w-[15vw] box-border;
   }
 
+  .mobile-menu{
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-4 justify-between w-fit flex-col overflow-y-auto pb-5 pt-28 pl-5 pr-5 box-border overflow-y-auto;
+  }
+
   .topbar {
     @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-4 px-6 py-3 max-h-20;
   }
 
   .renderdescription{
-    @apply overflow-y-auto gap-1 w-[55vw] h-full pb-[20px] box-border flex flex-col;
+    @apply overflow-y-auto gap-1 w-[100vw] sm:w-[50vw] md:w-[65vw] h-full pb-[20px] box-border flex flex-col;
   }
 
   .inner-container{
-    @apply fixed top-0 left-0 pl-[15vw] bg-dark-1 pt-20 w-full flex flex-row gap-1 box-border h-[100%];
+    @apply fixed top-0 left-0  pl-[10vw] xsm:pl-[5vw] md:pl-[15vw] bg-dark-1 pt-20 w-full flex flex-row gap-1 box-border h-[100%];
   }
 
   .rightsidebar{
-    @apply w-[40vw]
+    @apply sm:w-[50vw] md:w-[40vw]
   }
 
   .taskName{
@@ -106,7 +110,7 @@
   }
 
   .noTask{
-    @apply text-body-semibold ml-2 h-fit p-2 text-white
+    @apply text-body-semibold ml-2 h-fit p-2 text-white 
   }
 
   .linkActive{

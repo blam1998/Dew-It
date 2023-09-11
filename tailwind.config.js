@@ -150,7 +150,9 @@ module.exports = {
         },
       },
       screens: {
-        xs: "400px",
+        xsm: "600px",
+        md: "1350px",
+        sm: "1050px",
       },
       borderRadius: {
         lg: "var(--radius)",
