@@ -62,4 +62,5 @@
 
 .testimonial-border{
     border: 4px solid white;
+    transform: scale(1.0);
 }

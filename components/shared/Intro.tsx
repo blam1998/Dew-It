@@ -16,7 +16,7 @@ const Intro = () => {
         setIndex(random);
     }
 
-    setTimeout(randomizeTestimony,10000);
+    setTimeout(randomizeTestimony,5000);
     return(
         <main className = "bg-black h-fit flex flex-col gap-12 items-center overflow-y-auto overflow-x-hidden w-[100%]">
             <section className = "flex flex-col gap-4 items-center">
@@ -66,12 +66,12 @@ const Intro = () => {
                             <span className = "text-body-semibold">Maybe.</span></div>
                     </div>
                 </div>
-                <div className = "text-white border-box pt-[20rem] pb-20 flex flex-col items-center justify-center w-[50%]"> 
-                    <div className = "border-box pt-8 flex flex-row gap-4 w-[100%] overflow-x-hidden items-center justify-center">
+                <div className = "text-white border-box pt-[20rem] pb-20 flex flex-col items-center justify-center w-[90%] mb:w-[50%]"> 
+                    <div className = "border-box pt-8 flex flex-row gap-4 w-[100%] overflow-x-hidden overflow-y-hidden items-center justify-center">
                         {
                         testimonials? testimonials.map((c:any,i:any) => {
                             return(
-                                <div className = {`rounded-full testimonial-flex max-w-[48px] min-w-[48px] ${index === i? 'testimonial-border' : ''}`} id = {`testimony-${i}`}>
+                                <div className = {`overflow-y-hidden testimonial-flex max-w-[48px] min-w-[48px] ${index === i? 'testimonial-border' : ''}`} id = {`testimony-${i}`}>
                                     <Image src = {c.image} alt = "user" width = {48} height = {48}  className = "block ml-auto mr-auto"/>
                                 </div>
                             )
