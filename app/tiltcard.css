@@ -24,5 +24,42 @@
 }
 
 
+.background-mid{
+    background-image: url("../public/assets/background-mid.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+.background-mid::before{
+    content: "";
+    background-image: url("../public/assets/background-mid-before.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -100%;
+    right: 0;
+}
 
+.background-mid::after{
+    content: "";
+    background-image: url("../public/assets/background-mid-after.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 200px;
+    top: 100%;
+    display: block;
+    position: absolute;
+    padding-bottom: 15rem;
+}
+
+.testimonial-flex{
+    flex: 1 0 15%;
+    margin: 5px;
+}
+
+.testimonial-border{
+    border: 4px solid white;
+}

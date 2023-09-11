@@ -34,7 +34,7 @@ export default async function Page() {
         <div className = "renderdescription">
         {allTasks?.length !== 0? allTasks?.map((c,i) => {
             return(
-              <div className = "w-[100%]" id = {"task-" + i.toString()} key = {c._id.toString()}>
+              <div className = "currentDescription w-[100%]" id = {"task-" + i.toString()} key = {c._id.toString()}>
                 <RenderDescription 
                   taskName = {c.taskName}
                   description = {c.description}
@@ -57,3 +57,4 @@ export default async function Page() {
     </div>
   )
 }
+

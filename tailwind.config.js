@@ -105,7 +105,8 @@ module.exports = {
         "black": "#000000",
         "white": "#FFFFFF",
         "dark-blue": "#070747",
-        "gray": "#808080",
+        "gray": "#E5E5E5",
+        "light-blue": "#CAEEF0",
         "dark-red": "#FF0000",
         "light-gray": "#faf5f5",
         "dark-green": "#04D213",
@@ -151,6 +152,7 @@ module.exports = {
       },
       screens: {
         xsm: "600px",
+        mb: "800px",
         md: "1350px",
         sm: "1050px",
       },

@@ -85,25 +85,37 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
         ) : null
     }
 
+    const handleHighlight = (event:any) => {
+        if (typeof document !== 'undefined'){
+            const oldTarget = document.querySelectorAll(".task-desc.bg-light-blue")[0];
+            oldTarget?.classList.remove('bg-light-blue');
+            oldTarget?.classList.add('bg-white');
+        
+            event.currentTarget.classList.remove('bg-white');
+            event.currentTarget.classList.add('bg-light-blue');
+        }
+    }
+
 
 
     return(
-        <div className = {`text-black flex flex-row w-auto bg-white flex-nowrap`} key = {clientId}>
-            <div className = "bg-white p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
+        <div className = {`task-desc bg-white text-black flex flex-row w-auto flex-nowrap`} key = {clientId} onClick = {(e) => handleHighlight(e)}>
+            <div className = "p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
             </div>
-            <div className = "bg-white p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
+            <div className = "p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`} onClick = {() => descriptionHandler()}>{dateString}</div>
             </div>
-            <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
+            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
                 {!isDone? (<Image src = "/assets/check-mark.svg" title = "Mark as complete" alt = "Complete" width = {28} height = {28}/>) 
                 : (<Image src = "/assets/incomplete.svg" title = "Mark as incomplete" alt = "Incomplete" width = {28} height = {28}/>)}
             </div>
-            <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => deleteHandler()}>
+            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => deleteHandler()}>
                 <Image src = "/assets/trash-can.svg" title = "Delete" alt = "Delete" width = {28} height = {28}/>
             </div>
         </div>
     )
 }
+
 
 export default RenderDescription;
