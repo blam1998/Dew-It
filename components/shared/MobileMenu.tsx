@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
+import Image from 'next/image';
 
 const MobileMenu = () => {
     const path = usePathname();
@@ -17,7 +17,7 @@ const MobileMenu = () => {
         <div>
             <div className = "flex flex-col relative">
                 <div className = "text-white cursor-pointer w-[2.5vw] mb-4 text-center" onClick = {() => handleClick()}>
-                    X
+                    <Image src = '/assets/menu.png' title = "menu" alt = "menu" width = {48} height = {48}/>
                 </div>
                 <div className = {`${open? 'block' : 'hidden'} w-[100vw] text-white min-md:hidden h-screen overflow-y-auto`} id = "menu-modal">
                     <div onClick = {() => handleClick()}>

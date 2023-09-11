@@ -94,7 +94,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         newDate.setDate(Number(dateArray[1]));
         newDate.setFullYear(Number(dateArray[2]));
 
-        const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
+        const dateString = newDate.getMonth() + 1 + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
         
         onEdit(
@@ -119,7 +119,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
     }
 
     return (
-        <div className="flex flex-col items-center p-8 w-[100%] h-screen bg-dark-4">
+        <div className="flex flex-col items-center p-8 w-[100%] h-[100%] bg-dark-4 border-box block">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
                     {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}

@@ -68,7 +68,7 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
         
         root? root.render(
-            <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white`} id = {`description-${clientId}`}>
+            <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white border-box`} id = {`description-${clientId}`}>
                 <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
             </div>) : null
         
@@ -89,10 +89,10 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
     return(
         <div className = {`text-black flex flex-row w-auto bg-white flex-nowrap`} key = {clientId}>
-            <div className = "bg-white p-2 w-[50%] xsm:w-[60%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
+            <div className = "bg-white p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
             </div>
-            <div className = "bg-white p-2 w-[50%] xsm:w-[40%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
+            <div className = "bg-white p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
                 <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`} onClick = {() => descriptionHandler()}>{dateString}</div>
             </div>
             <div className = "bg-white m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>

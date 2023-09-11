@@ -49,7 +49,7 @@ export default async function Page() {
           }) : (<div className = "noTask">No Tasks</div>)
         }
         </div>
-        <div className = "hidden sm:block sm:w-[50vw] md:w-[40vw] bg-dark-4" id = 'rightsidebar'>
+        <div className = "hidden sm:block sm:w-[50vw] md:w-[40vw] bg-dark-4 h-screen" id = 'rightsidebar'>
         </div>
         <div className = "block sm:hidden absolute" id = 'rightsidebar-mobile'>
         </div>

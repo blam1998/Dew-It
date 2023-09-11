@@ -18,6 +18,7 @@ import { Textarea } from "../ui/textarea";
 import mongoose from "mongoose";
 import { updateTask } from "@/lib/actions/task.actions";
 import { useState } from "react";
+import Image from "next/image";
 
 interface Props {
     id: mongoose.Types.ObjectId,
@@ -126,9 +127,11 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
     }
 
     return (
-        <div className="flex flex-col items-center p-[2rem] xsm:p-[4rem] pb-20  xsm:pb-40 w-[100vw] overflow-auto h-screen bg-dark-4 border-box relative" key = {id.toString()} id = {clientId + "-description"}>
+        <div className="flex flex-col items-center pb-40 pr-[14vw] p-[2rem] xsm:p-[8vw] xsm:pb-40 w-screen overflow-auto h-screen bg-dark-4 border-box fixed" key = {id.toString()} id = {clientId + "-description"}>
             <Form {...form}>
-                <div className = "text-white absolute top-12 right-12" onClick = {() => handleClose()}>Close Here</div>
+                <div className = "text-white absolute top-4 right-4 pr-[10vw] cursor-pointer border-box" onClick = {() => handleClose()}>
+                    <Image src = "/assets/X.svg" alt = "Close" title = "Close Popup" width = {28} height = {28} />
+                </div>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
                     {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
                     <FormField

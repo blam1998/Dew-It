@@ -4,6 +4,7 @@ import LeftSideBar from '@/components/shared/LeftSideBar';
 import {currentUser, SignedIn, useAuth} from '@clerk/nextjs';
 import { checkNewUser, addNewUser } from '@/lib/actions/user.actions';
 import { useRouter } from 'next/navigation';
+import MobileMenu from '@/components/shared/MobileMenu';
 
 export default async function Page() {
   const user = await currentUser();
@@ -28,9 +29,12 @@ export default async function Page() {
       <TopBar/>
       <SignedIn>
         <div className = "inner-container">
-          <main className = "flex flex-row gap-4 leftsidebar">
-            <LeftSideBar/>
-          </main>
+          <div className = "leftsidebar hidden md:block">
+            <LeftSideBar />
+          </div>
+          <div className = "mobile-menu block md:hidden">
+            <MobileMenu />
+          </div>
         </div>
       </SignedIn>
     </div>

@@ -78,15 +78,15 @@
 
 @layer components {
   .leftsidebar {
-    @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-4 justify-between w-fit flex-col overflow-y-hidden pb-5 pt-28 pl-5 pr-5 w-[15vw] box-border;
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-3 justify-between w-fit flex-col overflow-y-hidden pb-5 pt-24 pl-5 pr-5 w-[15vw] box-border;
   }
 
   .mobile-menu{
-    @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-4 justify-between w-fit flex-col overflow-y-auto pb-5 pt-28 pl-5 pr-5 box-border overflow-y-auto;
+    @apply fixed left-0 top-0 z-20 flex h-screen bg-dark-3 justify-between w-fit flex-col overflow-y-auto pb-5 pt-24 pl-5 pr-5 box-border overflow-y-auto;
   }
 
   .topbar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-4 px-6 py-3 max-h-20;
+    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-3 px-6 py-3 max-h-20;
   }
 
   .renderdescription{

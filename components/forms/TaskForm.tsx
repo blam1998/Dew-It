@@ -95,7 +95,7 @@ function TaskForm( {user} : {user: String}){
     }
 
     return(
-        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen w-[80%]">
+        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen w-[80%] border-box">
             <Form {...form}>
                 <div className = "w-full mt-10">
                     <form onSubmit={form.handleSubmit(onSubmit)}>
