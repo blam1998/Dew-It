@@ -24,7 +24,7 @@ const Intro = (mypath : any) => {
         <main className = "bg-black h-fit flex flex-col gap-12 items-center overflow-y-auto overflow-x-hidden w-[100%]">
             <section className = "flex flex-col gap-4 items-center">
                 <h1 className = " text-heading1-bold text-white mt-8 z-20">Dew it</h1>
-                <h2 className = "text-white text-heading2-bold z-20">Get Organized Today.</h2>
+                <h2 className = "text-white text-heading2-bold z-20">Organization made easy.</h2>
                 <div className = "text-white text-body-semibold whitepace-pre-line text-center z-20">
                     Join us. We have cookies and memes.<br/>
                     Made with anger, stackoverflow, and about 13 monster energy drink.
@@ -121,7 +121,6 @@ const Intro = (mypath : any) => {
         </main>
     )
 }
-
 
 
 if (typeof document !== 'undefined'){

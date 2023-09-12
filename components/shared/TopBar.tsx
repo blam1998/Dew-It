@@ -8,7 +8,7 @@ const TopBar = () => {
         <section className = "topbar">
             <Link href = "/" className = "flex items-left pl-4">
                 <div className = "flex items-center">
-                    <Image src = "/assets/logo.png" alt = "Icon" width = {48} height = {16}/>
+                    <Image src = "/assets/logo.png" alt = "Icon" width = {48} height = {48}/>
                     <h1 className = "text-heading2-semibold text-white p-4">Dew it</h1>
                 </div>
             </Link>

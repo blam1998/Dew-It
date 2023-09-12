@@ -6,7 +6,7 @@ export default async function Page() {
   const user = await currentUser();
 
   var path = user? '/home' : '/sign-in'
-
+  
   return (
     <main className = "bg-black h-screen flex flex-col gap-4 items-center">
         <Intro path = {path}/>
