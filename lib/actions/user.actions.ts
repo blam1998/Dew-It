@@ -43,6 +43,7 @@ export async function addNewUser({
 } : Props){
     try{
         connectToDB();
+        console.log("Adding new user.")
         const currentDate = new Date();
         const insertUser = await User.findOneAndUpdate(
             {id: id},
