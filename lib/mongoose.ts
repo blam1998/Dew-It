@@ -11,13 +11,14 @@ export const connectToDB = async () => {
         return;
     }
 
-    if (!process.env.MONGODB_URL){
+    if (!process.env.MONGODB_URI){
         console.log("No DB URL.");
         return;
     }
 
     try{
-        await mongoose.connect(process.env.MONGODB_URL);
+        console.log("Trying to connect to mongodb");
+        await mongoose.connect(process.env.MONGODB_URI);
         isConnected = true;
         console.log("mongoDB is connected");
     }
