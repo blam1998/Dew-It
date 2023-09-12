@@ -16,7 +16,7 @@ const Intro = () => {
         while (random === index){
             random = Math.floor(Math.random() * testimonials.length);
         }
-        
+
         setIndex(random);
     }
 
@@ -30,7 +30,7 @@ const Intro = () => {
                     Join us. We have cookies and memes.<br/>
                     Made with anger, stackoverflow, and about 13 monster energy drink.
                 </div>
-                <Button onClick = {() => router.push('/home')} className = "hover:bg-primary-500 z-20">Get Started</Button>
+                <Button onClick = {() => router.push('/sign-in')} className = "hover:bg-primary-500 z-20">Get Started</Button>
                 <div className = "tilt-card max-w-[100vw] w-[100%] h-fit mt-20 mb-20 overflow-x-hidden overflow-y-hidden z-10 relative text-center" id = "tilt-card">
                     <Image src = '/assets/tilt-card2.png' alt = "Preview" width = {0} height = {0} sizes = "100vw"
                     style = {{width: '80%', height: 'auto'}} className = "tilt-card ml-auto mr-auto overflow-x-hidden overflow-y-hidden z-10 relative" id = "tilt-card-front"/>
