@@ -17,7 +17,12 @@ export default async function Page() {
       name: user?.lastName? user?.firstName + ' ' + user?.lastName : user?.firstName ||   "",
     }
 
-    const checkUser = await checkNewUser(userData);
+    const checkUser = await checkNewUser({
+      id: userData.id.toString(),
+      username: userData.username.toString(),
+      name: userData.name.toString()
+    }
+    );
 
     if (!checkUser){
       await addNewUser(userData);
@@ -25,18 +30,19 @@ export default async function Page() {
   }
 
   return (
-    <div className = "bg-dark-4">
-      <TopBar/>
-      <SignedIn>
-        <div className = "inner-container">
-          <div className = "leftsidebar hidden md:block">
-            <LeftSideBar />
+    <SignedIn>
+      <div className = "bg-dark-4">
+        <TopBar/>
+        
+          <div className = "inner-container">
+            <div className = "leftsidebar hidden md:block">
+              <LeftSideBar />
+            </div>
+            <div className = "mobile-menu block md:hidden">
+              <MobileMenu />
+            </div>
           </div>
-          <div className = "mobile-menu block md:hidden">
-            <MobileMenu />
-          </div>
-        </div>
-      </SignedIn>
-    </div>
+      </div>
+    </SignedIn>
   )
 }

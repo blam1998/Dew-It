@@ -15,7 +15,7 @@ interface Props{
 export async function checkNewUser({
     id,
     username,
-    name,
+    name
 } : Props) : Promise<boolean>{
     try{
         connectToDB();
@@ -29,6 +29,7 @@ export async function checkNewUser({
         
     }
     catch(error: any){
+        console.log(error);
         throw new Error(`Failed to check user: ${error.message}`);
     }
 }
