@@ -12,7 +12,11 @@ const Intro = () => {
     const [index, setIndex] = useState(0);
 
     const randomizeTestimony = () => {
-        const random = Math.floor(Math.random() * testimonials.length);
+        var random = Math.floor(Math.random() * testimonials.length);
+        while (random === index){
+            random = Math.floor(Math.random() * testimonials.length);
+        }
+        
         setIndex(random);
     }
 
@@ -22,18 +26,18 @@ const Intro = () => {
             <section className = "flex flex-col gap-4 items-center">
                 <h1 className = " text-heading1-bold text-white mt-8 z-20">Dew it</h1>
                 <h2 className = "text-white text-heading2-bold z-20">Get Organized Today.</h2>
-                <div className = "text-white text-body-semibold whitepace-pre text-center z-20">
+                <div className = "text-white text-body-semibold whitepace-pre-line text-center z-20">
                     Join us. We have cookies and memes.<br/>
-                    Made with anger, and only 13 monster energy drink.
+                    Made with anger, stackoverflow, and about 13 monster energy drink.
                 </div>
                 <Button onClick = {() => router.push('/home')} className = "hover:bg-primary-500 z-20">Get Started</Button>
-                <div className = "tilt-card max-w-[100vw] w-[100%] h-fit mt-8 mb-20 overflow-x-hidden overflow-y-hidden z-10 relative text-center" id = "tilt-card">
+                <div className = "tilt-card max-w-[100vw] w-[100%] h-fit mt-20 mb-20 overflow-x-hidden overflow-y-hidden z-10 relative text-center" id = "tilt-card">
                     <Image src = '/assets/tilt-card2.png' alt = "Preview" width = {0} height = {0} sizes = "100vw"
                     style = {{width: '80%', height: 'auto'}} className = "tilt-card ml-auto mr-auto overflow-x-hidden overflow-y-hidden z-10 relative" id = "tilt-card-front"/>
                 </div>
                 <div className = "background-mid text-white h-fit flex flex-col items-center w-[100%] h-fit relative pt-20 justify-center">
-                    <div className = "flex flex-col-reverse items-center-reverse mb:flex-row mb:justify-end mb:items-center gap-12 w-[90%] mb:ml-auto mb:mr-auto">
-                            <div className = "text-center mb:text-left text-wrap text-heading3-semibold w-[90%] mb:w-[30%] pt-12 border-box">
+                    <div className = "flex flex-col-reverse justify-center text-center items-center-reverse mb:flex-row mb:justify-end mb:items-center gap-12 w-[90%] mb:ml-auto mb:mr-auto">
+                            <div className = "text-left mb:text-left text-wrap text-heading3-semibold w-[100%] mb:w-[30%] pt-12 border-box">
                                 Designed solely to trigger your college/highschool traumas of late assignments.
 
                                 <span className = "text-wrap text-body-semibold">
@@ -46,24 +50,52 @@ const Intro = () => {
                                 <Image src = '/assets/design.png' alt = "design" title = "c:" width = {400} height = {200}/>
                             </div>
                     </div>
-                    <div className = "flex flex-col justify-center items-center mb:flex-row mb:justify-between mb:items-center gap-8 border-box pt-20 w-[90%]">
-                        <div className = "flex flex-col w-[100%] mb:w-[45%]">
+                    <div className = "flex flex-col justify-center items-center mb:flex-row mb:justify-between mb:items-start gap-8 border-box pt-20 w-[90%]">
+                        <div className = "flex flex-col w-[100%] mb:w-[30%]">
                             <img src = '/assets/easy_complete.gif' alt = "Easy Complete" className = "w-[100%] h-auto"/>
-                            <div className = "text-center text-heading3-semibold pt-4">We got easy task check-list.</div>
+                            <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
+                                We got an easy to use task check-list.
+                                <br/>
+                                <span className = "text-body-semibold text-left">
+                                    Complete your task with a signle click!
+                                </span>
+                            </div>
                         </div>
-                        <div className = "flex flex-col w-[100%] mb:w-[45%]">
+                        <div className = "flex flex-col w-[100%] mb:w-[30%]">
                             <img src = '/assets/easy_edit.gif' alt = "Easy Edit" className = "w-[100%] h-auto"/>
-                            <div className = "text-center text-heading3-semibold pt-4">We got easy task edit functionality.</div>
+                            <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
+                                We got an easy to use task editor.
+                                <br/>
+                                <span className = "text-body-semibold text-left">
+                                    We have long task descriptions. Perfect for those lengthy tasks.
+                                </span>
+                            </div>
+                        </div>
+                        <div className = "flex flex-col w-[100%] mb:w-[30%]">
+                            <img src = '/assets/this-week.png' alt = "Easy Edit" className = "w-[100%] h-auto"/>
+                            <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
+                                Keep track of your weekly tasks with ease.
+                                <br/>
+                                <span className = "text-body-semibold text-left text-wrap">
+                                    You can look at your tasks one week in advance, or look at all of your tasks if you have time on your hands.
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div className = "hidden mb:flex flex-row gap-20 border-box pt-20 w-[90%] justify-start">
                         <div>
                             <img src = '/assets/mobile-friendly.png' alt = "Mobile Friendly" title = "Mobile Friendly" className = "w-[100%] h-auto"/>
                         </div>
-                        <div className = "text-heading1-semibold whitespace-pre">
-                            It's mobile friendly. <br></br>
-                            <span className = "text-heading2-semibold">I promise.</span> <br></br>
-                            <span className = "text-body-semibold">Maybe.</span></div>
+                        <div className = "hidden mb:flex flex-col w-[50%] justify-between">
+                            <div>
+                                <img src = '/assets/mobile-friendly2.png' alt = "Mobile Friendly" title = "Mobile Friendly"/>
+                            </div>
+                            <div className = "text-heading1-semibold whitespace-pre-line">
+                                It's mobile friendly. <br></br>
+                                <span className = "text-heading2-semibold">I promise.</span> <br></br>
+                                <span className = "text-body-semibold">Maybe.</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className = "text-white border-box pt-[20rem] pb-20 flex flex-col items-center justify-center w-[90%] mb:w-[50%]"> 
@@ -71,17 +103,19 @@ const Intro = () => {
                         {
                         testimonials? testimonials.map((c:any,i:any) => {
                             return(
-                                <div className = {`overflow-y-hidden testimonial-flex max-w-[48px] min-w-[48px] ${index === i? 'testimonial-border' : ''}`} id = {`testimony-${i}`}>
+                                <div className = {`overflow-y-hidden testimonial-flex max-w-[48px] min-w-[48px] ${index === i? 'testimonial-border' : ''}`} key = {`testimony-${i}`} id = {`testimony-${i}`}>
                                     <Image src = {c.image} alt = "user" width = {48} height = {48}  className = "block ml-auto mr-auto"/>
                                 </div>
                             )
                         }) : null}
                     </div>
-                    <div className = "text-white pt-10 pb-10 text-body-semibold text-wrap w-[100%] text-center">{testimonials[index].description}
-                    <br/>
-                        <span>
-                            {`--${testimonials[index].name}`}
-                        </span>
+                    <div className = "flex flex-col justify-center items-center">
+                        <div className = "text-white pt-10 pb-10 text-body-semibold text-wrap w-[100%] text-left">{testimonials[index].description}
+                        <br/>
+                            <span>
+                                {`--${testimonials[index].name}`}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </section>

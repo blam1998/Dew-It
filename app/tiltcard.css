@@ -57,10 +57,10 @@
 
 .testimonial-flex{
     flex: 1 0 15%;
-    margin: 5px;
 }
 
 .testimonial-border{
+    box-sizing: content-box;
     border: 4px solid white;
     transform: scale(1.0);
 }
