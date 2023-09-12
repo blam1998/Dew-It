@@ -20,9 +20,11 @@ export async function checkNewUser({
     try{
         connectToDB();
         console.log("Checking new user");
+        console.log(id);
         const hasUser = await User.findOne({
             id: id,
         })
+        console.log(hasUser);
 
         return hasUser;
 
