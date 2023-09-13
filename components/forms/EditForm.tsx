@@ -18,6 +18,7 @@ import { Textarea } from "../ui/textarea";
 import mongoose from "mongoose";
 import { updateTask } from "@/lib/actions/task.actions";
 import { useState } from "react";
+import {keyMap} from "@/lib/keyMap";
 
 interface Props {
     id: mongoose.Types.ObjectId,
@@ -30,6 +31,8 @@ interface Props {
 }
 
 function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: Props) {
+
+    const keyMap = new Map([["*","✶"], ["-", "—"]]);
     const date = new Date(dueDate);
     date.setHours(0,0,0,0);
     var pastDue = false;
@@ -121,6 +124,13 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
             }})
     }
 
+    const handleKeyMarkUp = (event:any) => {
+        if (keyMap.has(event.key)){
+            event.preventDefault();
+            event.target.value += keyMap.get(event.key) 
+        }
+    }
+
     return (
         <div className="flex flex-col items-center p-8 w-[100%] h-[100%] bg-dark-4 overflow-y-auto mb:overflow-y-hidden border-box block">
             <Form {...form}>
@@ -133,7 +143,10 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="text-white">Task Name</FormLabel>
-                                <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
+                                <FormControl 
+                                    onKeyUp = {(target) => handleNameKeyInput(target)}
+                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                >
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
                                 <FormMessage />
@@ -166,7 +179,10 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         render={({ field }) => (
                             <FormItem className="mt-10">
                                 <FormLabel className="text-white">Description</FormLabel>
-                                <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
+                                <FormControl 
+                                    onKeyUp = {(target) => handleDescKeyInput(target)}
+                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                >
                                     <Textarea
                                         rows={16}
                                         placeholder="Description" {...field} />

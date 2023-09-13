@@ -19,6 +19,7 @@ import mongoose from "mongoose";
 import { updateTask } from "@/lib/actions/task.actions";
 import { useState } from "react";
 import Image from "next/image";
+import {keyMap} from "@/lib/keyMap";
 
 interface Props {
     id: mongoose.Types.ObjectId,
@@ -56,7 +57,6 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
 
     const handleClose = () => {
         const target = document.getElementById(clientId + "-description")
-        console.log(target)
         target? target.style.display = 'none' : null
     }
 
@@ -126,6 +126,13 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
             }})
     }
 
+    const handleKeyMarkUp = (event:any) => {
+        if (keyMap.has(event.key)){
+            event.preventDefault();
+            event.target.value += keyMap.get(event.key)
+        }
+    }
+
     return (
         <div className="flex flex-col items-center pb-40 pr-[14vw] p-[2rem] xsm:p-[8vw] xsm:pb-40 w-screen overflow-auto h-screen bg-dark-4 border-box fixed" key = {id.toString()} id = {clientId + "-description"}>
             <Form {...form}>
@@ -140,7 +147,10 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="text-white">Task Name</FormLabel>
-                                <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
+                                <FormControl 
+                                    onKeyUp = {(target) => handleNameKeyInput(target)}
+                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                >
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
                                 <FormMessage />
@@ -173,7 +183,10 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                         render={({ field }) => (
                             <FormItem className="mt-10">
                                 <FormLabel className="text-white">Description</FormLabel>
-                                <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
+                                <FormControl 
+                                    onKeyUp = {(target) => handleDescKeyInput(target)}
+                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                >
                                     <Textarea
                                         rows={16}
                                         placeholder="Description" {...field} />
