@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Popup from "./Popup";
+import { revalidatePath } from "next/cache";
 
 interface Props{
     taskName: string,
@@ -96,6 +97,12 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
         }
     }
 
+
+    const revalidate = () => {
+        revalidatePath(path);
+    }
+
+    setTimeout(revalidate,15000);
 
 
     return(
