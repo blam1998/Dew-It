@@ -17,7 +17,7 @@ export default async function Page() {
 
   var date = new Date();
 
-  const allTasks = await fetchDateTask(userId._id, '0', date.toString());
+  var allTasks = await fetchDateTask(userId._id, '0', date.toString());
 
   return (
     <div className = "w-[100%] bg-gray h-screen">

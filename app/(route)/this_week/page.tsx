@@ -17,7 +17,7 @@ export default async function Page() {
 
   var date = new Date();
 
-  const allTasks = await fetchDateTask(userId._id, '6', date.toString());
+  var allTasks = await fetchDateTask(userId._id, '6', date.toString());
   allTasks?.sort((a,b) => {
     return a.dueDate - b.dueDate
   })

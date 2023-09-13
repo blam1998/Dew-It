@@ -129,7 +129,7 @@ export async function deleteTask(id: string, path: string, userId: string){
 
 export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.ObjectId}, dateCounter: string, date: string){
     try{
-        const startDate = new Date(date); //todo
+        const startDate = new Date(); //todo
         var specificDate = new Date(date);
         specificDate.setDate(startDate.getDate() + Number(dateCounter)); //todo
         startDate.setHours(0,0,0,0);

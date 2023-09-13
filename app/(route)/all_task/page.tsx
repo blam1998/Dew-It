@@ -19,7 +19,7 @@ export default async function Page() {
 
   const userId = await fetchUser(user.id)
 
-  const allTasks = await fetchAllTask(userId._id);
+  var allTasks = await fetchAllTask(userId._id);
   allTasks?.sort((a,b) => {
     return a.dueDate - b.dueDate
   })
