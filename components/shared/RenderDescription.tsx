@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Popup from "./Popup";
 import { revalidatePath } from "next/cache";
+import { revalidateTask } from "@/lib/actions/task.actions";
 
 interface Props{
     taskName: string,
@@ -98,10 +99,9 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     }
 
 
-    const revalidate = () => {
-        revalidatePath(path);
+    const revalidate = async () => {
+        await revalidateTask(path);
     }
-
     setTimeout(revalidate,15000);
 
 

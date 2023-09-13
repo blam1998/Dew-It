@@ -190,3 +190,8 @@ export async function updateTask( data : update_Params){
         throw new Error(`Failed to update task: ${error.message}`)
     }
 }
+
+
+export async function revalidateTask(path:string){
+    revalidatePath(path);
+}
