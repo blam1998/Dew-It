@@ -82,6 +82,7 @@ function TaskForm( {user} : {user: String}){
         newDate.setMonth(Number(dateArray[0]) - 1);
         newDate.setDate(Number(dateArray[1]));
         newDate.setFullYear(Number(dateArray[2]));
+        newDate.setHours(0,0,0,0);
 
 
         await addTask({
