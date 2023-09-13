@@ -133,7 +133,7 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
         var specificDate = new Date(date);
         specificDate.setDate(startDate.getDate() + Number(dateCounter)); //todo
         startDate.setHours(0,0,0,0);
-        specificDate.setHours(0,0,0,0);
+        specificDate.setHours(23,59,59,0);
 
         
 

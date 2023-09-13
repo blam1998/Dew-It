@@ -74,9 +74,6 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         if (!target){return}
 
         target.innerHTML = remainder.toString();
-
-        e.target.value = e.target.value.replaceAll("*","✶");
-        e.target.value = e.target.value.replaceAll("-","—");
     }
 
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {

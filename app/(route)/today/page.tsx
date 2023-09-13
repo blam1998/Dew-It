@@ -8,7 +8,6 @@ import RenderDescription from '@/components/shared/RenderDescription';
 import MobileMenu from '@/components/shared/MobileMenu';
 
 
-
 export default async function Page() {
   const user = await currentUser();
 
@@ -18,7 +17,7 @@ export default async function Page() {
 
   const date = new Date();
 
-  const allTasks = await fetchDateTask(userId._id, '1', date.toString());
+  const allTasks = await fetchDateTask(userId._id, '0', date.toString());
 
   return (
     <div className = "w-[100%] bg-gray h-screen">
