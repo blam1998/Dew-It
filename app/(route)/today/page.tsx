@@ -20,6 +20,7 @@ export default async function Page() {
   var allTasks = await fetchDateTask(userId._id, '0', date.toString());
 
   const refetchTask = async () => {
+    allTasks = [];
     allTasks = await fetchDateTask(userId._id, '0', date.toString());
   }
 
