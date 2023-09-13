@@ -19,6 +19,12 @@ export default async function Page() {
 
   var allTasks = await fetchDateTask(userId._id, '0', date.toString());
 
+  const refetchTask = async () => {
+    allTasks = await fetchDateTask(userId._id, '0', date.toString());
+  }
+
+  setTimeout(refetchTask,15000);
+
   return (
     <div className = "w-[100%] bg-gray h-screen">
       <TopBar/>
