@@ -149,7 +149,7 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                                 <FormLabel className="text-white">Task Name</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleNameKeyInput(target)}
-                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                    //onKeyDown={(event) => handleKeyMarkUp(event)}
                                 >
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
@@ -185,11 +185,12 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                                 <FormLabel className="text-white">Description</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleDescKeyInput(target)}
-                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                    //onKeyDown={(event) => handleKeyMarkUp(event)}
                                 >
                                     <Textarea
                                         rows={16}
-                                        placeholder="Description" {...field} />
+                                        placeholder="Description" {...field} 
+                                        />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -18,6 +18,7 @@ import { Textarea } from "../ui/textarea";
 import { addTask } from "@/lib/actions/task.actions";
 import { useRouter, usePathname } from "next/navigation";
 import {keyMap} from "@/lib/keyMap";
+import { useState } from "react";
 
 
 
@@ -25,6 +26,8 @@ function TaskForm( {user} : {user: String}){
     const router = useRouter();
     const pathName = usePathname();
     const date = new Date();
+
+    const [useTaskName, setTaskName] = useState("");
 
 
 
@@ -57,9 +60,6 @@ function TaskForm( {user} : {user: String}){
         if (!target){return}
 
         target.innerHTML = remainder.toString();
-
-
-        //Markup section
     }
 
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
@@ -101,10 +101,16 @@ function TaskForm( {user} : {user: String}){
     //have a key list array of objects with its key value pair.
     //We would then map it to keyMap and replace our default settings.
 
-    const handleKeyMarkUp = (event:any) => {
-        if (keyMap.has(event.key)){
-            event.preventDefault();
-            event.target.value += keyMap.get(event.key)
+    const handleKeyMarkUp = (e:any) => {
+        if (keyMap.has(e.key)){
+            e.preventDefault();
+
+            const selectionStart = e.target.selectionStart;
+            const selectionEnd = e.target.selectionEnd;
+            const partLeft = e.target.value.substr(0,selectionStart);
+            const partRight = e.target.value.substr(selectionEnd);
+
+            e.target.value = partLeft + keyMap.get(e.key) + partRight;
         }
     }
 
@@ -121,8 +127,8 @@ function TaskForm( {user} : {user: String}){
                             <FormItem>
                             <FormLabel className = "text-white">Task Name</FormLabel>
                             <FormControl 
-                            onKeyUp = {(target) => handleNameKeyInput(target)}
-                            onKeyDown={(event) => handleKeyMarkUp(event)}
+                                onKeyUp = {(target) => handleNameKeyInput(target)}
+                                //onKeyDown={(event) => handleKeyMarkUp(event)}
                             >
                                 <Input placeholder="Task Name" {...field} className = "bg-white" id = "task-name-input"/>
                             </FormControl>
@@ -156,7 +162,7 @@ function TaskForm( {user} : {user: String}){
                             <FormLabel className = "text-white">Description</FormLabel>
                             <FormControl 
                                 onKeyUp = {(target) => handleDescKeyInput(target)}
-                                onKeyDown={(event) => handleKeyMarkUp(event)}
+                                //onKeyDown={(event) => handleKeyMarkUp(event)}
                             >
                                 <Textarea
                                 rows = {10}

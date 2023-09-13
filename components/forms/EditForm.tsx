@@ -145,7 +145,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                                 <FormLabel className="text-white">Task Name</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleNameKeyInput(target)}
-                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                    //onKeyDown={(event) => handleKeyMarkUp(event)}
                                 >
                                     <Input placeholder="Task Name" {...field} className="bg-white" />
                                 </FormControl>
@@ -181,7 +181,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                                 <FormLabel className="text-white">Description</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleDescKeyInput(target)}
-                                    onKeyDown={(event) => handleKeyMarkUp(event)}
+                                    //onKeyDown={(event) => handleKeyMarkUp(event)}
                                 >
                                     <Textarea
                                         rows={16}
