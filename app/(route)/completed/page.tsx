@@ -16,6 +16,9 @@ export default async function Page() {
   const userId = await fetchUser(user.id)
 
   const allTasks = await fetchAllCompletedTask(userId._id);
+  allTasks?.sort((a,b) => {
+    return a.dueDate - b.dueDate
+  })
 
   return (
     <div className = "w-[100%] bg-gray h-screen">

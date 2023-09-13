@@ -55,6 +55,11 @@ function TaskForm( {user} : {user: String}){
         if (!target){return}
 
         target.innerHTML = remainder.toString();
+
+
+        //Markup section
+        e.target.value = e.target.value.replaceAll("*","✶");
+        e.target.value = e.target.value.replaceAll("-","—");
     }
 
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
@@ -87,18 +92,15 @@ function TaskForm( {user} : {user: String}){
             pathName: pathName
         });
 
-        const target = document.getElementById('task-form-submit');
-
-
         window.location.reload();
-        router.push('/add_task');
     }
 
     return(
-        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen w-[80%] border-box">
+        <div className = "mt-20 flex flex-col items-center ml-auto mr-auto h-screen w-[80%] border-box overflow-y-auto mb:overflow-y-hidden pb-[20rem]">
             <Form {...form}>
                 <div className = "w-full mt-10">
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}
+                    >
                         <FormField
                         control={form.control}
                         name="taskName"
@@ -106,7 +108,7 @@ function TaskForm( {user} : {user: String}){
                             <FormItem>
                             <FormLabel className = "text-white">Task Name</FormLabel>
                             <FormControl onKeyUp = {(target) => handleNameKeyInput(target)}>
-                                <Input placeholder="Task Name" {...field} className = "bg-white"/>
+                                <Input placeholder="Task Name" {...field} className = "bg-white" id = "task-name-input"/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -136,7 +138,9 @@ function TaskForm( {user} : {user: String}){
                         render={({ field }) => (
                             <FormItem className = "mt-10">
                             <FormLabel className = "text-white">Description</FormLabel>
-                            <FormControl onKeyUp = {(target) => handleDescKeyInput(target)}>
+                            <FormControl 
+                                onKeyUp = {(target) => handleDescKeyInput(target)}
+                            >
                                 <Textarea
                                 rows = {10}
                                 placeholder="Description" {...field}

@@ -71,6 +71,9 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         if (!target){return}
 
         target.innerHTML = remainder.toString();
+
+        e.target.value = e.target.value.replaceAll("*","✶");
+        e.target.value = e.target.value.replaceAll("-","—");
     }
 
     const onSubmit = async (values: z.infer<typeof TaskValidation>) => {
@@ -119,9 +122,10 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
     }
 
     return (
-        <div className="flex flex-col items-center p-8 w-[100%] h-[100%] bg-dark-4 border-box block">
+        <div className="flex flex-col items-center p-8 w-[100%] h-[100%] bg-dark-4 overflow-y-auto mb:overflow-y-hidden border-box block">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-[100%]">
+                <form onSubmit={form.handleSubmit(onSubmit)}
+                    className="w-[100%]">
                     {pastDue && path !== "/completed"? (<div className = "text-dark-red text-heading2-semibold mb-4 mt-4">Past Due</div>) : (<div></div>)}
                     <FormField
                         control={form.control}

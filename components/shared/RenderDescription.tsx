@@ -99,12 +99,15 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`task-desc bg-white text-black flex flex-row w-auto flex-nowrap`} key = {clientId} onClick = {(e) => handleHighlight(e)}>
-            <div className = "p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] cursor-pointer overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
-                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`} onClick = {() => descriptionHandler()}>{task}</div>
+        <div className = {`task-desc bg-white text-black flex flex-row w-auto flex-nowrap cursor-pointer gap-2`} key = {clientId} onClick = {(e) => {
+            handleHighlight(e)
+            descriptionHandler()
+            }}>
+            <div className = "p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
+                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`}>{task}</div>
             </div>
             <div className = "p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
-                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`} onClick = {() => descriptionHandler()}>{dateString}</div>
+                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`}>{dateString}</div>
             </div>
             <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
                 {!isDone? (<Image src = "/assets/check-mark.svg" title = "Mark as complete" alt = "Complete" width = {28} height = {28}/>) 

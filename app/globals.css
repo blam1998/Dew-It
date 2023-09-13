@@ -94,7 +94,7 @@
   }
 
   .inner-container{
-    @apply fixed top-0 left-0  pl-[10vw] xsm:pl-[5vw] md:pl-[15vw] bg-dark-1 pt-20 w-full flex flex-row gap-1 box-border h-[100%];
+    @apply fixed top-0 left-0  pl-[10vw] xsm:pl-[6vw] md:pl-[15vw] bg-dark-1 pt-20 w-full flex flex-row gap-1 box-border h-[100%];
   }
 
   .rightsidebar{
