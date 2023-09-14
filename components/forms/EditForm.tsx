@@ -109,6 +109,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         
         
 
+        const now = new Date();
 
         await updateTask(
             {...{
@@ -117,7 +118,8 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                 taskName: taskName,
                 description: description,
                 isDone: isDone,
-                pathName: path
+                pathName: path,
+                timeZoneoffset: now.getTimezoneOffset()
             }})
     }
 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { NodeNextRequest } from "next/dist/server/base-http/node";
+import { number } from "zod";
 
 const taskSchema = new mongoose.Schema({
   taskName: {
@@ -27,6 +28,9 @@ const taskSchema = new mongoose.Schema({
     {
       type: String,
     },
+  timeOffset:{
+    type: Number,
+  }
 });
 
 const Task = mongoose.models.Task || mongoose.model("Task", taskSchema);

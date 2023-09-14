@@ -10,7 +10,9 @@ import EditForm from '@/components/forms/EditForm';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 import MobileMenu from '@/components/shared/MobileMenu';
+import { addTimeZone } from '@/lib/actions/task.actions';
 
+var newFeature = false;
 
 export default async function Page() {
   const user = await currentUser();
@@ -23,6 +25,12 @@ export default async function Page() {
   allTasks?.sort((a,b) => {
     return a.dueDate - b.dueDate
   })
+
+  if (!newFeature){
+    await addTimeZone();
+    newFeature = true;
+  }
+
 
   return (
     <div className = "w-[100%] bg-gray h-screen">

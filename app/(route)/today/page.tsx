@@ -19,13 +19,6 @@ export default async function Page() {
 
   var allTasks = await fetchDateTask(userId._id, '0', date.toString());
 
-  const refetchTask = async () => {
-    allTasks = [];
-    allTasks = await fetchDateTask(userId._id, '0', date.toString());
-  }
-
-  setTimeout(refetchTask,15000);
-
   return (
     <div className = "w-[100%] bg-gray h-screen">
       <TopBar/>
@@ -37,7 +30,7 @@ export default async function Page() {
           <MobileMenu />
         </div>
         <div className = "renderdescription">
-        {allTasks?.length !== 0? allTasks?.map((c,i) => {
+        {allTasks?.length !== 0? allTasks?.map((c:any,i:any) => {
             return(
               <div className = "w-[100%]" id = {"task-" + i.toString()} key = {c._id.toString()}>
                 <RenderDescription 

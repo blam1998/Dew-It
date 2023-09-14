@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Popup from "./Popup";
 import { revalidatePath } from "next/cache";
-import { revalidateTask } from "@/lib/actions/task.actions";
 
 interface Props{
     taskName: string,
@@ -23,15 +22,12 @@ interface Props{
 }
 
 const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId, userId} : Props) => {
-    const router = useRouter();
     const path = usePathname();
     const jsDate = new Date(dueDate);
     var pastDue = false;
-    const [task, setTask] = useState(taskName)
-    const [currDesc, setCurrDesc] = useState(description)
-    const [currDueDate, setCurrDueDate] = useState(jsDate);
-    const [popup, setPopup] = useState(false);
-    var myRoot:any = null
+    const [task, setTask] = useState(taskName) //client side update for edit task
+    const [currDesc, setCurrDesc] = useState(description) //client side update for edit task
+    const [currDueDate, setCurrDueDate] = useState(jsDate); //client side update for edit task
     const currDate = new Date();
 
     const dateString = (jsDate.getMonth() + 1) + "-" + jsDate.getDate() + "-" + jsDate.getFullYear();
@@ -40,10 +36,6 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     
     if (currDate > jsDate){
         pastDue = true;
-    }
-
-    const popupHandler = () => {
-        setPopup(!popup);
     }
 
     const completeHandler = async () => {
@@ -97,12 +89,6 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
             event.currentTarget.classList.add('bg-light-blue');
         }
     }
-
-
-    const revalidate = async () => {
-        await revalidateTask(path);
-    }
-    setTimeout(revalidate,15000);
 
 
     return(

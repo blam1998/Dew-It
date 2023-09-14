@@ -104,6 +104,8 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
 
         const dateString = newDate.getMonth() + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
+
+        const now = new Date();
         
         onEdit(
             {
@@ -122,7 +124,8 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                 taskName: taskName,
                 description: description,
                 isDone: isDone,
-                pathName: path
+                pathName: path,
+                timeZoneoffset: now.getTimezoneOffset()
             }})
     }
 

@@ -18,7 +18,7 @@ export default async function Page() {
   var date = new Date();
 
   var allTasks = await fetchDateTask(userId._id, '6', date.toString());
-  allTasks?.sort((a,b) => {
+  allTasks?.sort((a:any,b:any) => {
     return a.dueDate - b.dueDate
   })
 
@@ -33,7 +33,7 @@ export default async function Page() {
           <MobileMenu />
         </div>
         <div className = "renderdescription">
-        {allTasks?.length !== 0? allTasks?.map((c,i) => {
+        {allTasks?.length !== 0? allTasks?.map((c:any,i:number) => {
             return(
               <div className = "w-[100%]" id = {"task-" + i.toString()} key = {c._id.toString()}>
                 <RenderDescription 

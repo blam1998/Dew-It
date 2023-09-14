@@ -12,7 +12,8 @@ interface Props{
     dueDate: Date,
     taskName: string,
     description: string,
-    pathName: string
+    pathName: string,
+    timeZoneoffset: Number
 }
 
 
@@ -21,18 +22,21 @@ export async function addTask({
     dueDate,
     description,
     taskName,
-    pathName
+    pathName,
+    timeZoneoffset,
 } : Props){
     try{
         connectToDB();
 
         //taskName, isDone, author, dueDate, description
+
         const task = await Task.create({
             taskName: taskName,
             isDone: false,
             author: userId,
             dueDate: dueDate,
-            description: description
+            description: description,
+            timeOffset: timeZoneoffset
         })
 
         await User.findByIdAndUpdate(userId,
@@ -58,7 +62,7 @@ export async function fetchAllTask(userId : {userId: mongoose.Types.ObjectId}){
             populate:{
                 path: 'tasks',
                 model: Task,
-                select: "_id taskName isDone description dueDate"
+                select: "_id taskName isDone description dueDate timeOffset"
             }
         }).exec();
 
@@ -83,7 +87,7 @@ export async function fetchAllCompletedTask(userId: {userId: mongoose.Schema.Typ
             populate:{
                 path: 'tasks',
                 model: Task,
-                select: "_id taskName isDone description dueDate"
+                select: "_id taskName isDone description dueDate timeOffset"
             }
         }).exec();
 
@@ -119,7 +123,7 @@ export async function deleteTask(id: string, path: string, userId: string){
         const userDelete = await User.findByIdAndUpdate({_id: userId},
             {$pull: {tasks: id}})
         
-
+        
         revalidatePath(path);
     }
     catch(error:any){
@@ -129,21 +133,19 @@ export async function deleteTask(id: string, path: string, userId: string){
 
 export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.ObjectId}, dateCounter: string, date: string){
     try{
-        const startDate = new Date(); //todo
+        const startDate = new Date(date); //todo
         var specificDate = new Date(date);
         specificDate.setDate(startDate.getDate() + Number(dateCounter)); //todo
         startDate.setHours(0,0,0,0);
         specificDate.setHours(23,59,59,0);
 
+
+
         
 
         connectToDB();
-        const currUserTasks = Task.find({author: {$in:[userId]}})
+        const currUserTasks = await Task.find({author: {$in:[userId]}})
         .find({isDone: {$in:[false]}})
-        .find({dueDate: {
-            $gte: startDate,
-            $lte: specificDate,
-        }})
         .populate({
             path: 'author',
             model: User,
@@ -151,11 +153,20 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
             populate:{
                 path: 'tasks',
                 model: Task,
-                select: "_id taskName isDone description dueDate"
+                select: "_id taskName isDone description dueDate timeOffset"
             }
         }).exec();
 
-        return currUserTasks;
+        var finalUserTasks:any =  [];
+
+        currUserTasks.map((c,i) => {
+            var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000) + 1);
+            if (objTime >= startDate && objTime <= specificDate){
+                finalUserTasks.push(c);
+            }
+        })
+
+        return finalUserTasks;
     }
     catch(error:any){
         throw new Error(`Error fetching all tasks: ${error.message}`)
@@ -168,19 +179,22 @@ interface update_Params{
     description: string, 
     taskName: string, 
     dueDate: Date,
-    pathName: string
+    pathName: string,
+    timeZoneoffset: Number
 }
 
 export async function updateTask( data : update_Params){
     try{
         connectToDB();
+
         const filter = {_id: data.id}
         const update = {$set: 
             {
                 isDone: data.isDone,
                 description: data.description,
                 taskName: data.taskName,
-                dueDate: data.dueDate
+                dueDate: data.dueDate,
+                timeOffset: data.timeZoneoffset
             }}
 
         const result =  await Task.updateOne(filter,update);
@@ -191,7 +205,22 @@ export async function updateTask( data : update_Params){
     }
 }
 
+//add time zone field for all tasks.
+export async function addTimeZone(){
+    try{
+        console.log("Updating timezone");
+        connectToDB();
+        const task = await Task.updateMany(
+            {},
+            {
+                $set : {
+                    "timeOffset": 0
+                }
+            }
+        )
 
-export async function revalidateTask(path:string){
-    revalidatePath(path);
+    }
+    catch(error:any){
+        throw new Error(`failed to add timezone: ${error.message}`)
+    }
 }
