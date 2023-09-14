@@ -161,6 +161,7 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
 
         currUserTasks.map((c,i) => {
             var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000) + 1);
+            console.log(startDate, objTime, specificDate);
             if (objTime >= startDate && objTime <= specificDate){
                 finalUserTasks.push(c);
             }
@@ -202,25 +203,5 @@ export async function updateTask( data : update_Params){
     }
     catch(error:any){
         throw new Error(`Failed to update task: ${error.message}`)
-    }
-}
-
-//add time zone field for all tasks.
-export async function addTimeZone(){
-    try{
-        console.log("Updating timezone");
-        connectToDB();
-        const task = await Task.updateMany(
-            {},
-            {
-                $set : {
-                    "timeOffset": 0
-                }
-            }
-        )
-
-    }
-    catch(error:any){
-        throw new Error(`failed to add timezone: ${error.message}`)
     }
 }
