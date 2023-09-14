@@ -53,7 +53,7 @@ export async function fetchAllTask(userId : {userId: mongoose.Types.ObjectId}){
     try{
 
         connectToDB();
-        const currUserTasks = Task.find({author: {$in:[userId]}})
+        const currUserTasks = await Task.find({author: {$in:[userId]}})
         .find({isDone: {$in:[false]}})
         .populate({
             path: 'author',
@@ -65,6 +65,15 @@ export async function fetchAllTask(userId : {userId: mongoose.Types.ObjectId}){
                 select: "_id taskName isDone description dueDate timeOffset"
             }
         }).exec();
+
+        var finalUserTasks:any =  [];
+
+        currUserTasks.map((c,i) => {
+            var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000));
+            c.dueDate = objTime
+            finalUserTasks.push(c);
+        })
+
 
         return currUserTasks;
     }
@@ -78,7 +87,7 @@ export async function fetchAllTask(userId : {userId: mongoose.Types.ObjectId}){
 export async function fetchAllCompletedTask(userId: {userId: mongoose.Schema.Types.ObjectId}){
     try{
         connectToDB();
-        const currUserTasks = Task.find({author: {$in:[userId]}})
+        const currUserTasks = await Task.find({author: {$in:[userId]}})
         .find({isDone: {$in:[true]}})
         .populate({
             path: 'author',
@@ -91,7 +100,16 @@ export async function fetchAllCompletedTask(userId: {userId: mongoose.Schema.Typ
             }
         }).exec();
 
-        return currUserTasks;
+        var finalUserTasks:any =  [];
+
+        currUserTasks.map((c,i) => {
+            var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000));
+            c.dueDate = objTime
+            finalUserTasks.push(c);
+        })
+
+        return finalUserTasks;
+
     }
     catch(error:any){
         throw new Error(`Error fetching all tasks: ${error.message}`)
@@ -160,9 +178,9 @@ export async function fetchDateTask(userId : {userId: mongoose.Schema.Types.Obje
         var finalUserTasks:any =  [];
 
         currUserTasks.map((c,i) => {
-            var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000) + 1);
-            console.log(startDate, objTime, specificDate);
+            var objTime = new Date(c.dueDate.getTime() - (c.timeOffset * 60000));
             if (objTime >= startDate && objTime <= specificDate){
+                c.dueDate = objTime
                 finalUserTasks.push(c);
             }
         })

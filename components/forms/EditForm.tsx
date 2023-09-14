@@ -97,6 +97,8 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         newDate.setDate(Number(dateArray[1]));
         newDate.setFullYear(Number(dateArray[2]));
 
+        const finalDate = new Date(newDate.getTime() + (newDate.getTimezoneOffset() * 60000));
+
         const dateString = newDate.getMonth() + 1 + "-" + newDate.getDate() + "-" + newDate.getFullYear();
 
         
@@ -114,7 +116,7 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
         await updateTask(
             {...{
                 id: id,
-                dueDate: newDate,
+                dueDate: finalDate,
                 taskName: taskName,
                 description: description,
                 isDone: isDone,

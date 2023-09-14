@@ -16,7 +16,7 @@ export default async function Page() {
   const userId = await fetchUser(user.id)
 
   var allTasks = await fetchAllCompletedTask(userId._id);
-  allTasks?.sort((a,b) => {
+  allTasks?.sort((a:any,b:any) => {
     return a.dueDate - b.dueDate
   })
 
@@ -31,7 +31,7 @@ export default async function Page() {
           <MobileMenu />
         </div>
         <div className = "renderdescription">
-        {allTasks?.length !== 0? allTasks?.map((c,i) => {
+        {allTasks?.length !== 0? allTasks?.map((c:any,i:any) => {
             return(
               <div className = "w-[100%]" id = {"task-" + i.toString()} key = {c._id.toString()}>
                 <RenderDescription 

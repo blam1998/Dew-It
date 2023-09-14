@@ -106,6 +106,8 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
 
 
         const now = new Date();
+
+        const finalDate = new Date(newDate.getTime() + (newDate.getTimezoneOffset() * 60000));
         
         onEdit(
             {
@@ -120,7 +122,7 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
         await updateTask(
             {...{
                 id: id,
-                dueDate: newDate,
+                dueDate: finalDate,
                 taskName: taskName,
                 description: description,
                 isDone: isDone,

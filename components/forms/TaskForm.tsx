@@ -85,9 +85,10 @@ function TaskForm( {user} : {user: String}){
 
 
         const now = new Date();
+        const finalDate = new Date(newDate.getTime() + (newDate.getTimezoneOffset() * 60000));
         
         await addTask({
-            dueDate : newDate,
+            dueDate : finalDate,
             description: description,
             taskName: taskName,
             userId: user,
