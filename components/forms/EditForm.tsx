@@ -125,11 +125,17 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
             }})
     }
 
-    const handleKeyMarkUp = (event:any) => {
-        if (keyMap.has(event.key)){
-            event.preventDefault();
-            event.target.value += keyMap.get(event.key) 
-        }
+    const calendarInputButton = (value:number) => {
+        const target = document.getElementById('calendar-input');
+        
+        const dateArray = form.getValues().dueDate.split('-');
+        const newDate = new Date();
+        newDate.setMonth(Number(dateArray[0]) - 1);
+        newDate.setDate(Number(dateArray[1]) + value);
+        newDate.setFullYear(Number(dateArray[2]));
+
+        const dateString = newDate.getMonth() + 1 + "-" + newDate.getDate() + "-" + newDate.getFullYear();
+        form.setValue("dueDate",dateString);
     }
 
     return (
@@ -154,7 +160,6 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                             </FormItem>
                         )}
                     />
-
                         <div className = "flex flex-row justify-end w-[100%]">
                             <div id = "name-char-counter" className = "text-white right-0"></div>
                         </div>
@@ -167,18 +172,32 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                             <FormItem className="mt-4 text-black">
                                 <FormLabel className="text-white">Due Date</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="MM-DD-YYYY" {...field} className="bg-white" />
+                                    <Input placeholder="MM-DD-YYYY" {...field} className="bg-white" id = "calendar-input"/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <div className = "flex flex-row gap-8 w-[100%] p-4 pl-0 border-box justify-start">
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {() => calendarInputButton(1)}>
+                            +1 
+                        </button>
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {() => calendarInputButton(7)}>
+                            +7
+                        </button>
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {() => calendarInputButton(30)}>
+                            +30
+                        </button>
+                    </div>
 
                     <FormField
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormItem className="mt-10">
+                            <FormItem>
                                 <FormLabel className="text-white">Description</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleDescKeyInput(target)}

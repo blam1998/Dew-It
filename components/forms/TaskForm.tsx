@@ -99,23 +99,18 @@ function TaskForm( {user} : {user: String}){
         window.location.reload();
     }
 
-    //On key down, change specific keys to special characters.
-    //keyMap stores all of the characters.
-    //TODO: On future expansion with customizable keys, the user should
-    //have a key list array of objects with its key value pair.
-    //We would then map it to keyMap and replace our default settings.
+    const calendarInputButton = (e: any, value:number) => {
 
-    const handleKeyMarkUp = (e:any) => {
-        if (keyMap.has(e.key)){
-            e.preventDefault();
+        if (pathName === '/add_task'){e.preventDefault();}
+        
+        const dateArray = form.getValues().dueDate.split('-');
+        const newDate = new Date();
+        newDate.setMonth(Number(dateArray[0]) - 1);
+        newDate.setDate(Number(dateArray[1]) + value);
+        newDate.setFullYear(Number(dateArray[2]));
 
-            const selectionStart = e.target.selectionStart;
-            const selectionEnd = e.target.selectionEnd;
-            const partLeft = e.target.value.substr(0,selectionStart);
-            const partRight = e.target.value.substr(selectionEnd);
-
-            e.target.value = partLeft + keyMap.get(e.key) + partRight;
-        }
+        const dateString = newDate.getMonth() + 1 + "-" + newDate.getDate() + "-" + newDate.getFullYear();
+        form.setValue("dueDate",dateString);
     }
 
     return(
@@ -148,7 +143,7 @@ function TaskForm( {user} : {user: String}){
                         control={form.control}
                         name="dueDate"
                         render={({ field }) => (
-                            <FormItem className = "mt-10 text-black">
+                            <FormItem className = "mt-6 text-black">
                             <FormLabel className = "text-white">Due Date</FormLabel>
                             <FormControl>
                                 <Input placeholder="MM-DD-YYYY" {...field} className = "bg-white" />
@@ -158,11 +153,26 @@ function TaskForm( {user} : {user: String}){
                         )}
                         />
 
+                        <div className = "flex flex-row gap-8 w-[100%] p-4 pl-0 border-box justify-start">
+                            <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                                onClick = {(e) => calendarInputButton(e,1)}>
+                                +1 
+                            </button>
+                            <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                                onClick = {(e) => calendarInputButton(e,7)}>
+                                +7
+                            </button>
+                            <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                                onClick = {(e) => calendarInputButton(e,30)}>
+                                +30
+                            </button>
+                        </div>
+
                         <FormField
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormItem className = "mt-10">
+                            <FormItem>
                             <FormLabel className = "text-white">Description</FormLabel>
                             <FormControl 
                                 onKeyUp = {(target) => handleDescKeyInput(target)}

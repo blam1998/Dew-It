@@ -20,6 +20,7 @@ import { updateTask } from "@/lib/actions/task.actions";
 import { useState } from "react";
 import Image from "next/image";
 import {keyMap} from "@/lib/keyMap";
+import { useRouter, usePathname } from "next/navigation";
 
 interface Props {
     id: mongoose.Types.ObjectId,
@@ -33,6 +34,8 @@ interface Props {
 }
 
 function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clientId}: Props) {
+
+    const pathName = usePathname();
     const date = new Date(dueDate);
     date.setHours(0,0,0,0);
     var pastDue = false;
@@ -131,11 +134,19 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
             }})
     }
 
-    const handleKeyMarkUp = (event:any) => {
-        if (keyMap.has(event.key)){
-            event.preventDefault();
-            event.target.value += keyMap.get(event.key)
-        }
+    const calendarInputButton = (e: any, value:number) => {
+
+        if (pathName === '/add_task'){e.preventDefault();}
+        
+        const dateArray = form.getValues().dueDate.split('-');
+        const newDate = new Date();
+
+        newDate.setMonth(Number(dateArray[0]) - 1);
+        newDate.setDate(Number(dateArray[1]) + value);
+        newDate.setFullYear(Number(dateArray[2]));
+
+        const dateString = newDate.getMonth() + 1 + "-" + newDate.getDate() + "-" + newDate.getFullYear();
+        form.setValue("dueDate",dateString);
     }
 
     return (
@@ -181,12 +192,26 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                             </FormItem>
                         )}
                     />
+                    <div className = "flex flex-row gap-8 w-[100%] p-4 pl-0 border-box justify-start">
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {(e) => calendarInputButton(e,1)}>
+                            +1 
+                        </button>
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {(e) => calendarInputButton(e,7)}>
+                            +7
+                        </button>
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                            onClick = {(e) => calendarInputButton(e,30)}>
+                            +30
+                        </button>
+                    </div>
 
                     <FormField
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormItem className="mt-10">
+                            <FormItem>
                                 <FormLabel className="text-white">Description</FormLabel>
                                 <FormControl 
                                     onKeyUp = {(target) => handleDescKeyInput(target)}
@@ -205,7 +230,7 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                         <div id = "desc-char-counter" className = "text-white right-0"></div>
                     </div>
 
-                    <Button type="submit" className="mt-8 bg-primary-500 hover:bg-primary-500">Edit Task</Button>
+                    <Button type="submit" className="mt-4 bg-primary-500 hover:bg-primary-500">Edit Task</Button>
                 </form>
             </Form>
         </div>
