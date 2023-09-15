@@ -179,15 +179,15 @@ function EditForm({ id, dueDate, description, taskName, isDone, onEdit, path}: P
                         )}
                     />
                     <div className = "flex flex-row gap-8 w-[100%] p-4 pl-0 border-box justify-start">
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {() => calendarInputButton(1)}>
                             +1 
                         </button>
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {() => calendarInputButton(7)}>
                             +7
                         </button>
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {() => calendarInputButton(30)}>
                             +30
                         </button>

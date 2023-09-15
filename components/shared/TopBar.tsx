@@ -2,8 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {UserButton} from "@clerk/nextjs";
+import MobileMenu from './MobileMenu';
+import { useState } from 'react';
 
 const TopBar = () => {
+
     return(
         <section className = "topbar">
             <Link href = "/" className = "flex items-left pl-4">
@@ -12,7 +15,9 @@ const TopBar = () => {
                     <h1 className = "text-heading2-semibold text-white p-4">Dew it</h1>
                 </div>
             </Link>
-            <UserButton afterSignOutUrl="/sign-in"/>
+            <div className = "block">
+                <UserButton afterSignOutUrl="/sign-in"/>
+            </div>
         </section>
     )
 }

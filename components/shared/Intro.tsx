@@ -39,7 +39,7 @@ const Intro = (mypath : any) => {
                             <div className = "text-left mb:text-left text-wrap text-heading3-semibold w-[100%] mb:w-[30%] pt-12 border-box">
                                 Designed solely to trigger your college/highschool traumas of late assignments.
 
-                                <span className = "text-wrap text-body-semibold">
+                                <span className = "text-gray text-wrap text-body-semibold">
                                     <br/><br/><br/>Remember when you went for that sweet nap at 8 PM? telling yourself that it's only 30 minutes nap;
                                     That you will wake up and finish the last few easy problems within an hour; Only to wake up at 2 AM and a "Past Due" on your assignment?
                                     <br/><br/>Well... It's back.
@@ -55,7 +55,7 @@ const Intro = (mypath : any) => {
                             <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
                                 We got an easy to use task check-list.
                                 <br/>
-                                <span className = "text-body-semibold text-left">
+                                <span className = "text-gray text-body-semibold text-left">
                                     Complete your task with a signle click!
                                 </span>
                             </div>
@@ -65,7 +65,7 @@ const Intro = (mypath : any) => {
                             <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
                                 We got an easy to use task editor.
                                 <br/>
-                                <span className = "text-body-semibold text-left">
+                                <span className = "text-gray text-body-semibold text-left">
                                     We have long task descriptions. Perfect for those lengthy tasks.
                                 </span>
                             </div>
@@ -75,7 +75,7 @@ const Intro = (mypath : any) => {
                             <div className = "text-left text-heading3-semibold pt-4 whitespace-pre-line">
                                 Keep track of your weekly tasks with ease.
                                 <br/>
-                                <span className = "text-body-semibold text-left text-wrap">
+                                <span className = "text-gray text-body-semibold text-left text-wrap">
                                     You can look at your tasks one week in advance, or look at all of your tasks if you have time on your hands.
                                 </span>
                             </div>
@@ -92,7 +92,7 @@ const Intro = (mypath : any) => {
                             <div className = "text-heading1-semibold whitespace-pre-line">
                                 It's mobile friendly. <br></br>
                                 <span className = "text-heading2-semibold">I promise.</span> <br></br>
-                                <span className = "text-body-semibold">Maybe.</span>
+                                <span className = "text-gray text-body-semibold">Maybe.</span>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ const Intro = (mypath : any) => {
                     <div className = "flex flex-col justify-center items-center">
                         <div className = "text-white pt-10 pb-10 text-body-semibold text-wrap w-[100%] text-left">{testimonials[index].description}
                         <br/>
-                            <span>
+                            <span className = "text-gray">
                                 {`--${testimonials[index].name}`}
                             </span>
                         </div>

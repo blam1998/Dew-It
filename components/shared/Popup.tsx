@@ -193,15 +193,15 @@ function Popup({ id, dueDate, description, taskName, isDone, onEdit, path, clien
                         )}
                     />
                     <div className = "flex flex-row gap-8 w-[100%] p-4 pl-0 border-box justify-start">
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {(e) => calendarInputButton(e,1)}>
                             +1 
                         </button>
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {(e) => calendarInputButton(e,7)}>
                             +7
                         </button>
-                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md"
+                        <button className = "p-2 m-0 text-white text-body-semibold border-box bg-primary-500 rounded-md basis-1/6 max-w-[50px]"
                             onClick = {(e) => calendarInputButton(e,30)}>
                             +30
                         </button>
