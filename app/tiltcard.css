@@ -9,25 +9,15 @@
     transform: translateZ(100px);
 }
 
-.tilt-card::after{
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: -8rem;
-    z-index: 2;
-    background: url('../public/assets/tilt-card-back.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    transform: perspective(1000px) translateZ(90px);
-}
 
 
+
+/*
 .background-mid{
     background-image: url("../public/assets/background-mid.png");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 12rem;
 }
 
 .background-mid::before{
@@ -41,7 +31,9 @@
     top: -100%;
     right: 0;
 }
+*/
 
+/*
 .background-mid::after{
     content: "";
     background-image: url("../public/assets/background-mid-after.png");
@@ -54,6 +46,8 @@
     position: absolute;
     padding-bottom: 15rem;
 }
+*/
+
 
 .testimonial-flex{
     flex: 1 0 15%;
@@ -61,6 +55,6 @@
 
 .testimonial-border{
     box-sizing: content-box;
-    border: 4px solid white;
+    border: 4px solid lime;
     transform: scale(1.0);
 }
