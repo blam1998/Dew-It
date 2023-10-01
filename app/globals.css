@@ -109,6 +109,10 @@
     @apply text-body-semibold ml-2 h-fit w-[100%] p-2 overflow-hidden text-center
   }
 
+  .task-desc{
+    @apply bg-white text-black flex flex-row w-auto flex-nowrap cursor-pointer gap-2
+  }
+
   .noTask{
     @apply text-body-semibold ml-2 h-fit p-2 text-white 
   }

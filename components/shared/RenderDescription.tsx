@@ -38,7 +38,10 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
         pastDue = true;
     }
 
+    //On complete, update database and remove task from rightside bar if it's the one active.
     const completeHandler = async () => {
+        const target = document.getElementById('rightsidebar');
+
         await updateTaskStatus(id, isDone, path);
     }
 
@@ -92,15 +95,15 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`task-desc bg-white text-black flex flex-row w-auto flex-nowrap cursor-pointer gap-2`} key = {clientId} onClick = {(e) => {
+        <div className = {`task-desc ${path !== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""}`} key = {clientId} onClick = {(e) => {
             handleHighlight(e)
             descriptionHandler()
             }}>
             <div className = "p-2 w-[100%] xsm:w-[70%] sm:w-[60%] md:w-[80%] overflow-hidden text-ellipsis block whitespace-nowrap" title = {task}>
-                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskName`}>{task}</div>
+                <div className = {`taskName`}>{task}</div>
             </div>
-            <div className = "p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis block whitespace-nowrap">
-                <div className = {`${path!== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""} taskDate`}>{dateString}</div>
+            <div className = "p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis whitespace-nowrap">
+                <div className = {`taskDate`}>{dateString}</div>
             </div>
             <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
                 {!isDone? (<Image src = "/assets/check-mark.svg" title = "Mark as complete" alt = "Complete" width = {28} height = {28}/>) 
