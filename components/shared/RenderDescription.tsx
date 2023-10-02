@@ -1,7 +1,7 @@
 "use client"
 import { updateTaskStatus, deleteTask, fetchAllTask } from "@/lib/actions/task.actions";
 import mongoose from "mongoose";
-import React, { useState } from 'react';
+import React, { DOMElement, useState, useEffect } from 'react';
 import EditForm from "../forms/EditForm";
 import ReactDOM, { hydrate } from 'react-dom';
 import { usePathname } from "next/navigation";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Popup from "./Popup";
 import { revalidatePath } from "next/cache";
+import { assert } from "console";
 
 interface Props{
     taskName: string,
@@ -18,7 +19,7 @@ interface Props{
     description: string,
     id: mongoose.Types.ObjectId,
     clientId: string,
-    userId: mongoose.Types.ObjectId
+    userId: mongoose.Types.ObjectId | string
 }
 
 const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId, userId} : Props) => {
@@ -28,6 +29,7 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     const [task, setTask] = useState(taskName) //client side update for edit task
     const [currDesc, setCurrDesc] = useState(description) //client side update for edit task
     const [currDueDate, setCurrDueDate] = useState(jsDate); //client side update for edit task
+    const [srightBar, setRightBar] = useState();
     const currDate = new Date();
 
     const dateString = (jsDate.getMonth() + 1) + "-" + jsDate.getDate() + "-" + jsDate.getFullYear();
@@ -39,13 +41,16 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     }
 
     //On complete, update database and remove task from rightside bar if it's the one active.
-    const completeHandler = async () => {
-        const target = document.getElementById('rightsidebar');
-
+    const completeHandler = async (e:any) => {
+        const rightBar = document.getElementById('rightsidebar');
+        console.log(rightBar?.firstChild);
+        const root = createRoot(rightBar as HTMLElement);
+        root.unmount();
+        rightBar?.firstChild?.remove();
         await updateTaskStatus(id, isDone, path);
     }
 
-    const deleteHandler = async () => {
+    const deleteHandler = async (e:any) => {
         await deleteTask(id.toString(), path, userId.toString());
     }
 
@@ -65,7 +70,7 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
         
         root? root.render(
-            <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white border-box`} id = {`description-${clientId}`}>
+            <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white border-box`} id = {`description-${clientId}`} key = {`description-${clientId}`}>
                 <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
             </div>) : null
         
@@ -80,6 +85,8 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
             dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}
             clientId = {clientId}/>
         ) : null
+
+        setRightBar(root);
     }
 
     const handleHighlight = (event:any) => {
@@ -95,7 +102,9 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`task-desc ${path !== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""}`} key = {clientId} onClick = {(e) => {
+        <div className = {`task-desc ${path !== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""}`} 
+            key = {clientId}  id = {clientId}
+            onClick = {(e) => {
             handleHighlight(e)
             descriptionHandler()
             }}>
@@ -105,11 +114,11 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
             <div className = "p-2 hidden xsm:block xsm:w-[20%] sm:w-[40%] md:w-[20%] overflow-hidden text-ellipsis whitespace-nowrap">
                 <div className = {`taskDate`}>{dateString}</div>
             </div>
-            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => completeHandler()}>
+            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {(e) => completeHandler(e)}>
                 {!isDone? (<Image src = "/assets/check-mark.svg" title = "Mark as complete" alt = "Complete" width = {28} height = {28}/>) 
                 : (<Image src = "/assets/incomplete.svg" title = "Mark as incomplete" alt = "Incomplete" width = {28} height = {28}/>)}
             </div>
-            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {() => deleteHandler()}>
+            <div className = "m-auto p-2 w-fit cursor-pointer" onClick = {(e) => deleteHandler(e)}>
                 <Image src = "/assets/trash-can.svg" title = "Delete" alt = "Delete" width = {28} height = {28}/>
             </div>
         </div>
