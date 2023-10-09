@@ -7,7 +7,7 @@ import ScrollFade from '../animation/scroll-fade';
 import BrandInfo from './BrandInfo';
 import RotateImage from '../animation/RotateImage';
 
-import tiltCard from '@/public/assets/tilt-card2.png'
+import tiltCard from '@/public/assets/tilt-card.png'
 import InfoGallery from './InfoGallery';
 
 
@@ -32,7 +32,7 @@ export default function Intro({path}:IntroProps){
                 initial = {{opacity: 0, y: 100}}
                 animate = {{opacity: 1, y: 0}}
                 transition = {{delay: 0.5}}>
-                    <Image src = {tiltCard} alt = "tilt-card" className = "w-[90%] max-w-[min(90%, 90rem)] py-[5rem] mb:py-[5rem]"/>
+                    <Image src = {tiltCard} alt = "tilt-card" className = "hidden xsm:block w-[100%] lg:w-[80%] max-w-[min(80%, 90rem)] py-[5rem] mb:py-[5rem]"/>
                 </motion.div>
                 <InfoGallery/>
             </RotateImage>
