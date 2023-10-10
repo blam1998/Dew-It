@@ -9,6 +9,7 @@ import RotateImage from '../animation/RotateImage';
 
 import tiltCard from '@/public/assets/tilt-card.png'
 import InfoGallery from './InfoGallery';
+import DewItInfo from './DewItInfo';
 
 
 interface IntroProps{
@@ -32,8 +33,11 @@ export default function Intro({path}:IntroProps){
                 initial = {{opacity: 0, y: 100}}
                 animate = {{opacity: 1, y: 0}}
                 transition = {{delay: 0.5}}>
-                    <Image src = {tiltCard} alt = "tilt-card" className = "hidden xsm:block w-[100%] lg:w-[80%] max-w-[min(80%, 90rem)] py-[5rem] mb:py-[5rem]"/>
+                    <Image src = {tiltCard} alt = "tilt-card" 
+                    className = "hidden mt-24 xsm:block w-[100%] xsm:w-[80%] max-w-[min(80%, 90rem)] py-[5rem] mb:py-[5rem] box-border p-2 rounded-2xl bg-dark-3"/>
                 </motion.div>
+                <DewItInfo/>
+                <div className = "mt-[10rem]"></div>
                 <InfoGallery/>
             </RotateImage>
         </div>

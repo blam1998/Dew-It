@@ -1,36 +1,36 @@
-import React from 'react'
+"use client"
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import {motion} from 'framer-motion'
 import mobileFriendly from '@/public/assets/mobile-friendly.png'
 import mobileFriendly2 from '@/public/assets/mobile-friendly2.png'
-import easyComplete from '@/public//assets/easy_complete.gif'
-import easyEdit from '@/public/assets/easy_edit.gif'
+import easyComplete from '@/public//assets/easy-complete.gif'
+import easyEdit from '@/public/assets/easy-edit.gif'
 import thisWeek from '@/public/assets/this-week.png'
 import design from '@/public/assets/design.png'
 import upcoming from '@/public/assets/upcoming-changes.png'
 import InView from '../animation/InView'
 
+
 export default function InfoGallery() {
+  const [mobile,setMobile] = useState(false);
+
+  useEffect(() => {
+    window.innerWidth > 1020? setMobile(false) : setMobile(true)
+    console.log(window.innerWidth)
+  },[])
+
+  
   return (
     <div className = "flex flex-col justify-center items-start mt-8 pb-[20rem] w-[100%] text-gray-100">
-      <InView props = {{opacity: 1, x: 200}}>
-        <div className = "flex flex-col justify-center items-center w-[90%] mb:w-[50%] gap-12">
-          <div className = "text-left mb:text-center">
-            <h2 className = "text-[1.25rem] lg:text-[1.75rem]">Designed to trigger your college PTSD...</h2>
-            <h2 className = "text-[1.25rem] lg:text-[1.75rem]">And maybe create new ones.</h2>
-          </div>
-          <Image src = {design} alt = "Design" quality = {90} />
-        </div>
-      </InView>
-      
       {/*Feature Showcase*/}
 
-      <div className = "flex flex-row flex-wrap w-[100%] mt-28 p-8 gap-20 justify-center lg:justify-between items-center lg:items-start">
-        <div className = "flex flex-col flex-wrap basis-[90%] lg:basis-[45%] gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
-          <InView props = {{opacity: 1, x: 200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3/80 box-border p-4 rounded-xl">
+      <div className = "flex flex-row flex-wrap w-[100%] mt-28 p-8 gap-20 justify-center lg:justify-center items-center lg:items-start">
+        <div className = "flex flex-col flex-wrap basis-[100%] lg:basis-[45%] gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
+          <InView props = {{opacity: 1, x: mobile? 200 : -200}}>
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
               <Image src = {easyComplete} alt = "Easy Complete" quality = {90}/>
-              <div className = "w-[100%] lg:w-[70%]">
+              <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
                   Simple and efficient.
                 </div>
@@ -40,10 +40,10 @@ export default function InfoGallery() {
               </div>
             </div>
           </InView>
-          <InView props = {{opacity: 1, x:-200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3/80 box-border p-4 rounded-xl">
+          <InView props = {{opacity: 1, x: mobile? -200 : -200}}>
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
               <Image src = {thisWeek} alt = "This Week's Tasks" quality = {90}/>
-              <div className = "w-[100%] lg:w-[70%]">
+              <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
                   Easy to organize.
                 </div>
@@ -54,11 +54,11 @@ export default function InfoGallery() {
             </div>
           </InView>
         </div>
-        <div className = "flex flex-col flex-wrap basis-[90%] lg:basis-[45%] lg:mt-[15rem]  gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
-          <InView props = {{opacity: 1, x: 200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3/80 box-border p-4 rounded-xl">
+        <div className = "flex flex-col flex-wrap basis-[100%] lg:basis-[45%] lg:mt-[15rem]  gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
+          <InView props = {{opacity: 1, x: mobile? 200 : 200}}>
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
               <Image src = {easyEdit} alt = "Easy Edit" quality = {90}/>
-              <div className = "w-[100%] lg:w-[70%]">
+              <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
                   Easy to use and convenient.
                 </div>
@@ -69,10 +69,10 @@ export default function InfoGallery() {
               </div>
             </div>
           </InView>
-          <InView props = {{opacity: 1, x: -200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3/80 box-border p-4 rounded-xl">
+          <InView props = {{opacity: 1, x: mobile? -200 : 200}}>
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
               <Image src = {upcoming} alt = "Upcoming Changes" quality = {90}/>
-              <div className = "w-[100%] lg:w-[70%]">
+              <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
                   More features and quality of life additions in progress!
                 </div>
