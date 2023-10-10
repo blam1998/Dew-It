@@ -28,7 +28,7 @@ export default function InfoGallery() {
       <div className = "flex flex-row flex-wrap w-[100%] mt-28 p-8 gap-20 justify-center lg:justify-center items-center lg:items-start">
         <div className = "flex flex-col flex-wrap basis-[100%] lg:basis-[45%] gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
           <InView props = {{opacity: 1, x: mobile? 200 : -200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 xsm:p-8 rounded-xl">
               <Image src = {easyComplete} alt = "Easy Complete" quality = {90}/>
               <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
@@ -41,7 +41,7 @@ export default function InfoGallery() {
             </div>
           </InView>
           <InView props = {{opacity: 1, x: mobile? -200 : -200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 xsm:p-8 rounded-xl">
               <Image src = {thisWeek} alt = "This Week's Tasks" quality = {90}/>
               <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
@@ -56,7 +56,7 @@ export default function InfoGallery() {
         </div>
         <div className = "flex flex-col flex-wrap basis-[100%] lg:basis-[45%] lg:mt-[15rem]  gap-12 lg:gap-20 xl:gap-30 2xl:gap-40">
           <InView props = {{opacity: 1, x: mobile? 200 : 200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 xsm:p-8 rounded-xl">
               <Image src = {easyEdit} alt = "Easy Edit" quality = {90}/>
               <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
@@ -70,7 +70,7 @@ export default function InfoGallery() {
             </div>
           </InView>
           <InView props = {{opacity: 1, x: mobile? -200 : 200}}>
-            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 rounded-xl">
+            <div className = "flex flex-col justify-center items-center bg-dark-3 box-border p-4 xsm:p-8 rounded-xl">
               <Image src = {upcoming} alt = "Upcoming Changes" quality = {90}/>
               <div className = "w-[100%] lg:w-[70%] mt-4">
                 <div className = "text-[1.25rem] text-center font-semibold">
