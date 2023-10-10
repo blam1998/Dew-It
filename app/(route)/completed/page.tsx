@@ -6,7 +6,7 @@ import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchAllTask, fetchAllCompletedTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
 import MobileMenu from '@/components/shared/MobileMenu';
-
+import RenderContainer from '@/components/shared/RenderContainer';
 
 export default async function Page() {
   const user = await currentUser();
@@ -40,12 +40,12 @@ export default async function Page() {
                   id = {c._id.toString()}
                   dueDate = {c.dueDate}
                   isDone = {c.isDone}
-                  clientId = {"task-"+i.toString()}
+                  clientId = {"task-"+c._id.toString()}
                   userId = {userId._id.toString()}
                 />
               </div>
             )
-          }) : (<div className = "noTask">No Tasks</div>)
+          }) : (<div className = "noTask">No Tasks Completed</div>)
         }
         </div>
         <div className = "hidden sm:block sm:w-[50vw] md:w-[40vw] bg-dark-4 h-screen" id = 'rightsidebar'>
@@ -56,3 +56,4 @@ export default async function Page() {
     </div>
   )
 }
+

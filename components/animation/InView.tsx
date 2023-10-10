@@ -14,7 +14,7 @@ export default function InView({children, props}:inViewProps) {
 
   return (
     <motion.div ref = {ref}
-    className = {`flex flex-box w-full justify-center items-center basis-[90%] lg:basis-[45%]`}
+    className = {`flex flex-box w-full justify-center items-center basis-[100%] lg:basis-[45%]`}
     style = {{
         opacity: isInView? opacity : 0, x: isInView? 0 : x,
         transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
