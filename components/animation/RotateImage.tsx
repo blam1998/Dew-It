@@ -30,12 +30,12 @@ export default function RotateImage({children}:RotateImageProps) {
             transition = {{
                 duration: 0.3,
             }}>
-                <div className = "relative w-full h-full overflow-hidden">
+                <div className = "relative w-full h-full overflow-hidden blur-lg">
                     <Image src = {rotateImg} alt = "Rotate Image" className = "rotate-image hidden lg:block translate-x-[0%] -translate-y-[15%] -z-10"
                     id = "rotate-image-1"/>
-                    <Image src = {rotateImg} alt = "Rotate Image" className = "rotate-image hidden lg:block -translate-x-[5%] translate-y-[25%] -z-10"
+                    <Image src = {rotateImg} alt = "Rotate Image" className = "rotate-image hidden lg:block -translate-x-[5%] translate-y-[50%] -z-10"
                     id = "rotate-image-2" />
-                    <Image src = {rotateImg} alt = "Rotate Image" className = "rotate-image hidden lg:block -translate-x-[10%] translate-y-[30%] -z-10"
+                    <Image src = {rotateImg} alt = "Rotate Image" className = "rotate-image hidden lg:block -translate-x-[10%] translate-y-[75%] -z-10"
                     id = "rotate-image-3" />
                 </div>
             </motion.div>

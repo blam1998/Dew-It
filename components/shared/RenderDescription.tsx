@@ -39,6 +39,9 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     if (currDate > jsDate){
         pastDue = true;
     }
+    
+    let completeColor = path !== "/completed"? pastDue? "text-dark-red" : "text-black" : "text-dark-green";
+
 
     //On complete, update database and remove task from rightside bar if it's the one active.
     const completeHandler = async (e:any) => {
@@ -102,7 +105,7 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
 
 
     return(
-        <div className = {`task-desc ${path !== "/completed" && pastDue? "text-dark-red" : "text-black"} ${path === "/completed"? "text-dark-green" : ""}`} 
+        <div className = {`task-desc ${completeColor}`} 
             key = {clientId}  id = {clientId}
             onClick = {(e) => {
             handleHighlight(e)

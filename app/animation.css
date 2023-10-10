@@ -1,0 +1,46 @@
+
+.tilt-card{
+    position: relative;
+    display: block;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    border-radius: 1rem;
+    z-index: 10;
+    transform: translateZ(100px);
+}
+
+.colorGlow {
+    animation: opacityGlow 2.5s ease-in-out infinite;
+}
+
+
+@keyframes opacityGlow{
+    0%{
+        opacity: 50%;
+    }
+    12.5%{
+        opacity: 62.5%;
+    }
+    25%{
+        opacity: 75%;
+    }
+    37.5%{
+        opacity: 87.5%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    62.5%{
+        opacity: 87.5%;
+    }
+    75%{
+        opacity: 75%;
+    }
+    87.5%{
+        opacity: 62.5%;
+    }
+    100%{
+        opacity: 50%;
+    }
+}
+

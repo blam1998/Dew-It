@@ -1,5 +1,5 @@
 import '../globals.css'
-import '../tiltcard.css'
+import '../animation.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'

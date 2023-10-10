@@ -17,10 +17,10 @@ export default function BrandInfo({path} : BrandInfoProps) {
         <div className = "flex flex-row gap-4 items-center justify-center box-border py-8">
             <Button 
             onClick = {() => router.push(path)} 
-            className = "hover:bg-emerald-700 hover:text-black hover:scale-[1.1]">Get Started</Button>
+            className = "hover:bg-emerald-500 hover:text-black hover:scale-[1.1] hover:shadow-lg hover:shadow-emerald-300/80 transition-all">Log In</Button>
             <Button 
             onClick = {() => router.push('/sign-up')}
-            className = "hover:bg-emerald-700 hover:text-black hover:scale-[1.1]">Sign Up</Button>
+            className = "hover:bg-emerald-500 hover:text-black hover:scale-[1.1] hover:shadow-lg hover:shadow-emerald-300/80 transition-all">Sign Up</Button>
         </div>
     </>
   )
