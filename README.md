@@ -1,3 +1,9 @@
+<h1>Upcoming Features and Changes</h1>
+<li>Task Priority and Sorting tasks by priority.
+<li>Quality of life updates to Add Tasks.
+<li>Bug report page.
+
+<br><br>
 <h1>Setting Up</h1>
 <h3>Initializing Project</h3>
 <div>
@@ -43,6 +49,7 @@ We will use this library for resuable CSS components such as Forms, Buttons, Tex
 </div>
 <li>https://ui.shadcn.com/docs/installation/next</li>
 <li>https://ui.shadcn.com/docs/components/form</li>
+<br>
 
 
 
@@ -54,3 +61,5 @@ We will use this library for resuable CSS components such as Forms, Buttons, Tex
 <li>Database schema resides in 'lib/models'</li>
 <li>Database actions resides in 'lib/action'</li>
 <br><br>
+
+

@@ -64,20 +64,16 @@ const RenderDescription = ({taskName, dueDate, isDone, description, id, clientId
     }
 
     const descriptionHandler = () => {
-        var root2:any = null
-        var root: any = null
-
+        let root2:any = null
+        let root: any = null
 
         const container = document.getElementById('rightsidebar');
         root = container? createRoot(container) : null
 
-        
         root? root.render(
             <div className = {`text-black heading1-bold renderdescription hidden sm:block sm:w-[100%] h-screen bg-white border-box`} id = {`description-${clientId}`} key = {`description-${clientId}`}>
                 <EditForm id = {id} description = {currDesc} taskName = {task} isDone = {isDone} dueDate = {currDueDate} onEdit = {(data: any) => handleNameChange(data)} path = {path}/>
             </div>) : null
-        
-        
         
 
         const container2 = document.getElementById('rightsidebar-mobile');
