@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
