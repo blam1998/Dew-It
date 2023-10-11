@@ -5,6 +5,11 @@ import  TaskForm  from '@/components/forms/TaskForm';
 import {currentUser} from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/user.actions';
 import MobileMenu from '@/components/shared/MobileMenu';
+import { usePathname } from 'next/navigation';
+import ReactGA from 'react-ga4'
+
+ReactGA.initialize("G-Q52BV44ZNC");
+ReactGA.send({hitType: "pageview", page: usePathname(), title: "Logged In"})
 
 export default async function Page() {
   const user = await currentUser();
