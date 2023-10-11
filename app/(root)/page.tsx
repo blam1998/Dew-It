@@ -2,6 +2,11 @@ import Image from 'next/image'
 import Intro from '@/components/home/Intro';
 import { currentUser } from '@clerk/nextjs';
 import { testimonials } from '@/lib/testimonials';
+import ReactGA from 'react-ga4'
+
+ReactGA.initialize("G-Q52BV44ZNC");
+ReactGA.send({hitType: "pageview", page: "/", title: "Home Page"})
+
 
 export default async function Page() {
   const user = await currentUser();
