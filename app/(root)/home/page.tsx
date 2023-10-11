@@ -7,11 +7,12 @@ import { useRouter } from 'next/navigation';
 import MobileMenu from '@/components/shared/MobileMenu';
 import ReactGA from 'react-ga4'
 
-ReactGA.initialize("G-Q52BV44ZNC");
-ReactGA.send({hitType: "pageview", page: "/home", title: "Logged In"})
+
 
 
 export default async function Page() {
+  ReactGA.initialize("G-Q52BV44ZNC");
+  ReactGA.send({hitType: "pageview", page: "/home", title: "Logged In"})
   const user = await currentUser();
 
   if (user){

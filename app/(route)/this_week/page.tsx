@@ -6,9 +6,12 @@ import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchAllTask, fetchDateTask } from '@/lib/actions/task.actions';
 import RenderDescription from '@/components/shared/RenderDescription';
 import MobileMenu from '@/components/shared/MobileMenu';
+import ReactGA from 'react-ga4';
 
 
 export default async function Page() {
+  ReactGA.initialize("G-Q52BV44ZNC");
+  ReactGA.send({hitType: "pageview", page: "/home", title: "Logged In"})
   const user = await currentUser();
 
   if (!user){return}

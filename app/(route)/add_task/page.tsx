@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
@@ -9,10 +8,11 @@ import MobileMenu from '@/components/shared/MobileMenu';
 import { usePathname } from 'next/navigation';
 import ReactGA from 'react-ga4'
 
-ReactGA.initialize("G-Q52BV44ZNC");
-ReactGA.send({hitType: "pageview", page: usePathname(), title: "Logged In"})
+
 
 export default async function Page() {
+  ReactGA.initialize("G-Q52BV44ZNC");
+  ReactGA.send({hitType: "pageview", page: '/add_task', title: "Add Task"})
   const user = await currentUser();
 
   if (!user){return null;}

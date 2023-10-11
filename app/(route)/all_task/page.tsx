@@ -10,10 +10,13 @@ import EditForm from '@/components/forms/EditForm';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 import MobileMenu from '@/components/shared/MobileMenu';
+import ReactGA from 'react-ga4';
 
 var newFeature = false;
 
 export default async function Page() {
+  ReactGA.initialize("G-Q52BV44ZNC");
+  ReactGA.send({hitType: "pageview", page: "/all_task", title: "Logged In"})
   const user = await currentUser();
 
   if (!user){return}
